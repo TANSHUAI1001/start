@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
 import com.tan.start.dao.ActivityMapper;
 import com.tan.start.entity.Activity;
 import com.tan.start.entity.ActivityExample;
@@ -20,7 +21,8 @@ public class AvtivityServiceImpl implements ActivityService{
 	@Override
 	public List<Activity> queryActivities() {
 		ActivityExample activityExample = new ActivityExample();
-		activityExample.createCriteria().andActivityIdBetween(1000L, 1009L);
+		activityExample.createCriteria().andActivityIdBetween(1000L, 1008L);
+		
 		return activityMapper.selectByExample(activityExample);
 	}
 

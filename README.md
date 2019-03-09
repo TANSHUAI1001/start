@@ -81,3 +81,21 @@ mybatis.mapper-locations=classpath:mapper/**/*.xml
 @MapperScan(basePackages = {"com.tan.start.dao"})
 或者在mapper接口加注解，不然spring无法识别
 
+
+## 分页 
+
+pagehelper自动配置拦截器，不需要配置，只需一句并开始查询即可
+
+```
+PageHelper.startPage(1,3);
+List<Activity> list = activityService.queryActivities();
+```
+
+[MyBatis-Plus](https://mp.baomidou.com/guide/)
+
+
+## logback
+
+springboot默认使用logback
+添加配置文件并配置路径
+logging.config=classpath:logback.xml

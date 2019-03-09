@@ -40,6 +40,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<!-- dao接口导入报错 import org.apache.ibatis.annotations.Param; -->
 		<dependency>
@@ -52,9 +58,15 @@
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
-		    <version>8.0.15</version>
 		</dependency>
-
+		
+		<!-- pagehelper  -->
+		<dependency>
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper-spring-boot-starter</artifactId>
+		    <version>1.2.10</version>
+		</dependency>
+		
 		
 	</dependencies>
 
