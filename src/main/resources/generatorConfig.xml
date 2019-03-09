@@ -1,23 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+	<!-- classPathEntry 与 context 同级 -->
   <context id="context1">
   	
+  	<!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖
+     -->
+    <property name="autoDelimitKeywords" value="false"/>
+    <!-- 生成的Java文件的编码 -->
+    <property name="javaFileEncoding" value="UTF-8"/>
+    <!-- 格式化java代码 -->
+    <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+    <!-- 格式化XML代码 -->
+    <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+    
+    <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+    
     <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/shop?useUnicode=true&amp;characterEncoding=utf-8" 
-    	driverClass="com.mysql.cj.jdbc.Driver" password="root" userId="root" />
+    	driverClass="com.mysql.cj.jdbc.Driver" password="root" userId="root" >
+    	<!--MySQL 8.x 需要指定服务器的时区-->
+		<property name="serverTimezone" value="Asia/Shanghai"/>
+		<!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
+		<!--参考 : http://www.mybatis.org/generator/usage/mysql.html-->
+		<property name="nullCatalogMeansCurrent" value="true"/>
+    </jdbcConnection>
+    <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+        <!-- 
+            true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+            false：默认,
+                scale>0;length>18：使用BigDecimal;
+                scale=0;length[10,18]：使用Long；
+                scale=0;length[5,9]：使用Integer；
+                scale=0;length<5：使用Short；
+         -->
+        <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    
+<!--     <javaModelGenerator targetPackage="com.tan.start.entity" targetProject="start/src/main/java" /> -->
+<!-- Maven build和 eclipse 插件build不一样，maven的基准目录是 ${workspace_loc:/start}不需要加项目名 -->
     <javaModelGenerator targetPackage="com.tan.start.entity" targetProject="src/main/java" />
+    
+    <!-- XML文件 -->
+<!--     <sqlMapGenerator targetPackage="mapper" targetProject="start/src/main/resources"> -->
     <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
     	<!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
         <property name="enableSubPackages" value="false"/>
         <!-- 是否针对string类型的字段在set的时候进行trim调用 --> 
         <property name="trimStrings" value="true"/> 
     </sqlMapGenerator>
+    
+    <!-- Mapper接口 -->
+<!--     <javaClientGenerator targetPackage="com.tan.start.dao" targetProject="start/src/main/java" type="XMLMAPPER"> -->
     <javaClientGenerator targetPackage="com.tan.start.dao" targetProject="src/main/java" type="XMLMAPPER">
-    	<property name="enableSubPackages" value="false" /> 
+    	<property name="enableSubPackages" value="true" /> 
     </javaClientGenerator>
-    <table schema="shop" tableName="activity"></table> 
-<!--     <table schema="???" tableName="???"> -->
-<!--       <columnOverride column="???" property="???" /> -->
-<!--     </table> -->
+<!--     <table schema="shop" tableName="activity"></table> -->
+<!--     <table schema="shop" tableName="course_info"></table>  -->
+<!--     <table schema="shop" tableName="course_user_info"></table>  -->
+<!--     <table schema="shop" tableName="employee"></table>  -->
+<!--     <table schema="shop" tableName="success_record"></table>  -->
+<!--     <table schema="shop" tableName="user"></table>  -->
+<!--     <table schema="shop" tableName="user_info"></table>  -->
   </context>
 </generatorConfiguration>
