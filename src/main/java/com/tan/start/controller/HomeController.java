@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tan.start.entity.Activity;
@@ -22,6 +22,8 @@ public class HomeController {
 	
 	@Resource
 	private ActivityService activityService;
+	
+	private Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value="/index")
 	public ModelAndView index(ModelAndView modelAndView) {
@@ -49,6 +51,7 @@ public class HomeController {
 		PageHelper.startPage(2,3);
 		List<Activity> list = activityService.queryActivities();
 		PageInfo<Activity> info = new PageInfo<Activity>(list);
+		logger.debug("size: "+info.getSize());
 		return info;
 		
 	}

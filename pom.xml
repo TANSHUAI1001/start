@@ -54,7 +54,7 @@
 		    <version>2.0.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<!-- mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
@@ -67,6 +67,19 @@
 		    <version>1.2.10</version>
 		</dependency>
 		
+		<!-- druid -->		
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid-spring-boot-starter</artifactId>
+		    <version>1.1.14</version>
+		</dependency>
+		
+		<!-- redis.clients/jedis -->
+		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		</dependency>
+				
 		
 	</dependencies>
 

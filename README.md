@@ -99,3 +99,9 @@ List<Activity> list = activityService.queryActivities();
 springboot默认使用logback
 添加配置文件并配置路径
 logging.config=classpath:logback.xml
+
+## 数据库连接池
+
+Spring 推荐使用dbcp；
+Hibernate 推荐使用c3p0和proxool
+druid比较强大,pom 配置druid-spring-boot-starter
