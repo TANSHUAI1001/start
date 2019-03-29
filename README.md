@@ -110,11 +110,11 @@ druid比较强大,pom 配置druid-spring-boot-starter
 
 serverTimezone=GMT
 
-## Redis Session
+## Redis-Session-Cache
 
 spring session data redis + jedis
 
-## Redis Cache
+替换
 
 **Lettuce**
 Lettuce和Jedis的都是连接Redis Server的客户端程序。
@@ -122,3 +122,8 @@ Jedis在实现上是直连redis server，多线程环境下非线程安全，除
 Lettuce基于Netty的连接实例（StatefulRedisConnection），可以在多个线程间并发访问，且线程安全，
 满足多线程环境下的并发访问，同时它是可伸缩的设计，一个连接实例不够的情况也可以按需增加连接实例。
 
+Lettuce 需要commons-pool2
+
+https://docs.spring.io/spring-data/redis/docs/2.1.3.RELEASE/reference/html/
+
+redis 缓存序列化问题 ，默认使用JDK序列化可不配置 --> 不使用devtool

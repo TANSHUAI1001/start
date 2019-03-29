@@ -8,5 +8,7 @@ import com.tan.start.entity.Activity;
 public interface ActivityService {
 	
 	public List<Activity> queryActivities();
+
+	public Activity findById(Long id);
 	
 }

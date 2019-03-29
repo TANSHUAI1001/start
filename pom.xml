@@ -40,11 +40,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+		
 		
 		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<!-- dao接口导入报错 import org.apache.ibatis.annotations.Param; -->
@@ -75,22 +71,33 @@
 		</dependency>
 		
 		<!-- redis.clients/jedis -->
-		<dependency>
-		    <groupId>redis.clients</groupId>
-		    <artifactId>jedis</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 		    <groupId>redis.clients</groupId> -->
+<!-- 		    <artifactId>jedis</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-data-redis</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+		</dependency>
+		
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-				
-		
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-pool2</artifactId>
+		</dependency>	
+		<dependency>        
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
