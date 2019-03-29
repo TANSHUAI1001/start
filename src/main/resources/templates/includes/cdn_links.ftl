@@ -1,5 +1,4 @@
 
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
 <#-- https://v3.bootcss.com/components/ -->
