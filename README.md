@@ -127,3 +127,10 @@ Lettuce 需要commons-pool2
 https://docs.spring.io/spring-data/redis/docs/2.1.3.RELEASE/reference/html/
 
 redis 缓存序列化问题 ，默认使用JDK序列化可不配置 --> 不使用devtool
+
+
+## quartz
+
+spring自带支持定时器的任务实现。其可通过简单配置来使用到简单的定时任务。
+
+

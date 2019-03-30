@@ -21,7 +21,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/test")
 	public String test() {
-		logger.debug("test  format arg {1} {2}", 100,200);
+		logger.debug("test  format arg {}", "100");
 		return "sub/test";
 	}
 	

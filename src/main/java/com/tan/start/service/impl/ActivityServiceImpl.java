@@ -5,11 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.Page;
 import com.tan.start.dao.ActivityMapper;
 import com.tan.start.entity.Activity;
 import com.tan.start.entity.ActivityExample;
@@ -17,7 +15,7 @@ import com.tan.start.service.ActivityService;
 
 @Service
 @CacheConfig(cacheNames = "activity")
-public class AvtivityServiceImpl implements ActivityService{
+public class ActivityServiceImpl implements ActivityService{
 
 	@Resource
 	private ActivityMapper activityMapper;
