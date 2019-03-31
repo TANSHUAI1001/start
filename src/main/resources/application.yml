@@ -2,7 +2,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /hello
+#    context-path: /hello
     session:
       timeout: PT2H
       
@@ -11,6 +11,8 @@ spring:
   session:    store-type: redis
   redis:    host: 127.0.0.1
     port: 6379
+    password: 
+    timeout: 5000
     lettuce:      pool:        min-idle: 1
         max-idle: 10
         max-active: 200
@@ -30,10 +32,16 @@ spring:
       max-active: 10
       max-wait: 10000
       max-create-task-count: 10
+      web-stat-filter:        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
       stat-view-servlet:
         enabled: true        url-pattern: /druid/*
         login-username: admin
         login-password: admin123
+      filter:        stat:          enabled: true
+          slow-sql-millis: 100
+          log-slow-sql: true
         
   # freemarker config  freemarker:
     enabled: true    charset: UTF-8
@@ -46,5 +54,39 @@ mybatis:  mapper-locations:  - classpath:mapper/**/*.xml
   
 # logback
 logging:  config: classpath:logback.xml
-  
+
+# febs 配置
+febs:
+  # 是否在控制台打印 sql语句
+  showsql: true
+  # 时间类型参数在前端页面的展示格式，默认格式为 yyyy-MM-dd HH:mm:ss
+  timeFormat: yyyy-MM-dd HH:mm:ss
+  # 是否开启 AOP 日志，默认开启
+  openAopLog: true
+  shiro:
+    # shiro redis缓存时长，默认1800秒
+    expireIn: 1800
+    # session 超时时间，默认1800000毫秒
+    sessionTimeout: 1800000
+    # rememberMe cookie有效时长，默认86400秒，即一天
+    cookieTimeout: 86400
+    # 免认证的路径配置，如静态资源，druid监控页面，注册页面，验证码请求等
+    anonUrl: /assets/**,/druid/**
+    # 登录 url
+    loginUrl: /login
+    # 登录成功后跳转的 url
+    successUrl: /index
+    # 登出 url
+    logoutUrl: /logout
+    # 未授权跳转 url
+    unauthorizedUrl: /error
+  # 验证码
+  validateCode:
+    # 宽度，默认 146px
+    width: 146
+    # 高度，默认 33px
+    height: 33
+    # 验证码字符个数，默认4个字符
+    length: 4
+
       

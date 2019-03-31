@@ -1,8 +1,8 @@
 
-<script src="jquery/jquery.min.js"></script>
+<script src="assets/jquery/jquery.min.js"></script>
 
-<script src="twitter-bootstrap/bootstrap.min.js"></script>
-<link href="twitter-bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="assets/twitter-bootstrap/bootstrap.min.js"></script>
+<link href="assets/twitter-bootstrap/bootstrap.min.css" rel="stylesheet">
 
-<script src="moment/moment.min.js"></script>
-<script src="moment/zh-cn.js"></script>
+<script src="assets/moment/moment.min.js"></script>
+<script src="assets/moment/zh-cn.js"></script>
