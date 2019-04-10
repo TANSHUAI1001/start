@@ -2,3 +2,5 @@ log/
 target/
 !src/main/resources/static/favicon.ico
 src/main/resources/static/
+.idea/
+.settings/
