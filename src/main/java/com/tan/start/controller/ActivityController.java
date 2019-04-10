@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,7 @@ public class ActivityController {
 	// ResponseEntity不仅可以返回json结果，还可以定义返回的HttpHeaders和HttpStatus
 	@RequestMapping(value="/page")
 	@ResponseBody
+	@RequiresPermissions(value = "queryall")
 	public Object page() {
 		PageHelper.startPage(2,3);
 		List<Activity> list = activityService.queryActivities();

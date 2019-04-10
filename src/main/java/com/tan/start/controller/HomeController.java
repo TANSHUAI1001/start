@@ -1,5 +1,8 @@
 package com.tan.start.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -8,12 +11,14 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tan.start.annotation.Thinking;
 import com.tan.start.utils.ResponseBo;
 
 @Controller
@@ -30,7 +35,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/test")
-	public String test() {
+	@Thinking
+	public String test(HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("test  format arg {}", "100");
 		return "sub/test";
 	}
