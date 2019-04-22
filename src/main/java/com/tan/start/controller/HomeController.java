@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tan.start.annotation.Thinking;
+//import com.tan.start.annotation.Thinking;
 import com.tan.start.utils.ResponseBo;
 
 @Controller
@@ -35,7 +35,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/test")
-	@Thinking
+//	@Thinking
 	public String test(HttpServletRequest request,HttpServletResponse response) {
 		logger.debug("test  format arg {}", "100");
 		return "sub/test";

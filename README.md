@@ -1,5 +1,7 @@
 # start
 
+源码查看使用Intelij IDEA可查看Java文件并持续追踪，eclipse（STS）只能查看class文件，配置好麻烦。
+
 ## MBG的使用
 
 ### 两种配置方法
