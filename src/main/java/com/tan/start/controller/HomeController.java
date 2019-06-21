@@ -50,9 +50,10 @@ public class HomeController {
 	public String login(String username,String password) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username.trim(), password.trim());
         Subject subject = SecurityUtils.getSubject();
-        if (subject != null)
-            subject.logout();
-        subject.login(token);
+        if (subject != null){
+			subject.logout();
+			subject.login(token);
+		}
         return "redirect:index";
        
 	}

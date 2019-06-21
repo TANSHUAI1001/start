@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 public class AspectConfig {
     Logger logger = LoggerFactory.getLogger(AspectConfig.class);
 
-//	@Pointcut("@annotation(Thinking)")
-    @Pointcut("execution(public * com.tan.start.controller.*.*(..))")
+	@Pointcut("@annotation(com.tan.start.annotation.Thinking)")
+//    @Pointcut("execution(public * com.tan.start.controller.*.*(..))")
     public void method(){
     }
 	
