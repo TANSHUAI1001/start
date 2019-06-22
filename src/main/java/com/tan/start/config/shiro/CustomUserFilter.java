@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 
 import com.alibaba.fastjson.JSON;
 import com.tan.start.utils.HttpUtils;
-import com.tan.start.utils.ResponseBo;
+import com.tan.start.utils.ResponseResult;
 
 public class CustomUserFilter extends UserFilter {
 
@@ -24,7 +24,7 @@ public class CustomUserFilter extends UserFilter {
 			HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 			httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
 			httpServletResponse.setContentType("application/json; charset=utf-8");
-			httpServletResponse.getWriter().print(JSON.toJSON(ResponseBo.error()));
+			httpServletResponse.getWriter().print(JSON.toJSON(ResponseResult.error()));
 			return false;
 		} else {
 			saveRequestAndRedirectToLogin(request, response);

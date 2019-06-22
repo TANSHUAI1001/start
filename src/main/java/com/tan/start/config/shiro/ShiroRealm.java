@@ -48,7 +48,8 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
-        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+//        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        SimpleUser  user = (SimpleUser) SecurityUtils.getSubject().getPrincipal();
 //        String userName = user.getUsername();
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
@@ -62,7 +63,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
         // 获取用户权限集
         List<String> permissionList = sysPermissionService.findPermissionsByRoleId(singleRoleId);
-        Set<String> permissionSet = permissionList.stream().collect(Collectors.toSet());
+        Set<String> permissionSet = new HashSet<>(permissionList);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
@@ -98,10 +99,10 @@ public class ShiroRealm extends AuthorizingRealm {
 //        return new SimpleAuthenticationInfo(user, password, getName());
         
         // 通过用户名到数据库查询用户信息
-        SysUser user = sysUserService.findByName(userName);
-
-        if (user == null)
-            throw new UnknownAccountException("用户名或密码错误！");
+        SysUser sysUser = sysUserService.findByName(userName);
+        SimpleUser user = new SimpleUser(sysUser);
+//        if (user == null)
+//            throw new UnknownAccountException("用户名或密码错误！");
         if (!password.equals(user.getPassword()))
             throw new IncorrectCredentialsException("用户名或密码错误！");
         if (new Integer(-1).equals(user.getState()))
