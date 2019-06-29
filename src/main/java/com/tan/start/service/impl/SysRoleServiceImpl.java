@@ -11,19 +11,19 @@ import com.tan.start.service.SysRoleService;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService{
-	
-	@Autowired
-	private SysRoleMapper sysRoleMapper;
 
-	@Override
-	public List<SysRole> findByUserId(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
-	@Override
-	public SysRole findBySingleRole(Integer singleRoleId) {
-		return sysRoleMapper.selectByPrimaryKey(singleRoleId);
-	}
+    @Override
+    public List<SysRole> findByUserId(Long userId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public SysRole findBySingleRole(Integer singleRoleId) {
+        return sysRoleMapper.selectByPrimaryKey(singleRoleId);
+    }
 
 }

@@ -17,23 +17,23 @@ import com.tan.start.service.SysPermissionService;
 @Service
 public class SysPermissionServiceImpl implements SysPermissionService{
 
-	@Autowired
-	private SysRolePermissionMapper sysRolePermissionMapper;
-	@Autowired
-	private SysPermissionMapper sysPermissionMapper;
-	
-	@Override
-	public List<String> findPermissionsByRoleId(Integer roleId) {
-		SysRolePermissionExample example = new SysRolePermissionExample();
-		example.createCriteria().andRoleIdEqualTo(roleId);
-		List<SysRolePermission> sysRolePermissions =  sysRolePermissionMapper.selectByExample(example);
-		
-		List<Integer> permissionIds = sysRolePermissions.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toList());
-		
-		SysPermissionExample permissionExample = new SysPermissionExample();
-		permissionExample.createCriteria().andIdIn(permissionIds);
-		List<SysPermission> permissions = sysPermissionMapper.selectByExample(permissionExample);
-		return permissions.stream().map(SysPermission::getValue).collect(Collectors.toList());
-	}
+    @Autowired
+    private SysRolePermissionMapper sysRolePermissionMapper;
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
+
+    @Override
+    public List<String> findPermissionsByRoleId(Integer roleId) {
+        SysRolePermissionExample example = new SysRolePermissionExample();
+        example.createCriteria().andRoleIdEqualTo(roleId);
+        List<SysRolePermission> sysRolePermissions =  sysRolePermissionMapper.selectByExample(example);
+
+        List<Integer> permissionIds = sysRolePermissions.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toList());
+
+        SysPermissionExample permissionExample = new SysPermissionExample();
+        permissionExample.createCriteria().andIdIn(permissionIds);
+        List<SysPermission> permissions = sysPermissionMapper.selectByExample(permissionExample);
+        return permissions.stream().map(SysPermission::getValue).collect(Collectors.toList());
+    }
 
 }

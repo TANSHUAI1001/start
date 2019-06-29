@@ -23,36 +23,36 @@ import com.tan.start.service.ActivityService;
 @Controller
 @RequestMapping(value="/activity")
 public class ActivityController {
-	@Resource
-	private ActivityService activityService;
-	
-	private Logger logger = LoggerFactory.getLogger(ActivityController.class);
+    @Resource
+    private ActivityService activityService;
 
-	@RequestMapping(value="/find/{id}")
-	@ResponseBody
-	public Activity findByID(@PathVariable("id") Long id) {
-		return activityService.findById(id);
-	}
-	
-	@RequestMapping(value="/data")
-	@ResponseBody
-	public List<Activity> data(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("name","shuai");
-		logger.debug("sessionNew ?  "+session.isNew());
-		return activityService.queryActivities();
-	}
-	
-	// ResponseEntity不仅可以返回json结果，还可以定义返回的HttpHeaders和HttpStatus
-	@RequestMapping(value="/page")
-	@ResponseBody
-	@RequiresPermissions(value = "queryall")
-	public Object page() {
-		PageHelper.startPage(2,3);
-		List<Activity> list = activityService.queryActivities();
-		PageInfo<Activity> info = new PageInfo<Activity>(list);
-		logger.info("size: "+info.getSize());
-		return info;
-		
-	}
+    private Logger logger = LoggerFactory.getLogger(ActivityController.class);
+
+    @RequestMapping(value="/find/{id}")
+    @ResponseBody
+    public Activity findByID(@PathVariable("id") Long id) {
+        return activityService.findById(id);
+    }
+
+    @RequestMapping(value="/data")
+    @ResponseBody
+    public List<Activity> data(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("name","shuai");
+        logger.debug("sessionNew ?  "+session.isNew());
+        return activityService.queryActivities();
+    }
+
+    // ResponseEntity不仅可以返回json结果，还可以定义返回的HttpHeaders和HttpStatus
+    @RequestMapping(value="/page")
+    @ResponseBody
+    @RequiresPermissions(value = "queryall")
+    public Object page() {
+        PageHelper.startPage(2,3);
+        List<Activity> list = activityService.queryActivities();
+        PageInfo<Activity> info = new PageInfo<Activity>(list);
+        logger.info("size: "+info.getSize());
+        return info;
+
+    }
 }

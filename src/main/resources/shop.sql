@@ -214,8 +214,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'joe', 'password', null, null, '', '1', '2019-03-31 23:06:31', '1');
-INSERT INTO `sys_user` VALUES ('2', 'jill', 'password1', null, null, null, '2', '2019-04-09 15:44:38', '1');
+INSERT INTO `sys_user` VALUES ('1', 'joe', 'e10adc3949ba59abbe56e057f20f883e', null, null, '', '1', '2019-03-31 23:06:31', '1');
+INSERT INTO `sys_user` VALUES ('2', 'jill', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '2', '2019-04-09 15:44:38', '1');
 
 -- ----------------------------
 -- Table structure for sys_user_permission

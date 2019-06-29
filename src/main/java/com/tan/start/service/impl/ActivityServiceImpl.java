@@ -17,21 +17,21 @@ import com.tan.start.service.ActivityService;
 @CacheConfig(cacheNames = "activity")
 public class ActivityServiceImpl implements ActivityService{
 
-	@Resource
-	private ActivityMapper activityMapper;
-	
-	@Override
-	public List<Activity> queryActivities() {
-		ActivityExample activityExample = new ActivityExample();
-		activityExample.createCriteria().andActivityIdBetween(1000L, 1008L);
-		
-		return activityMapper.selectByExample(activityExample);
-	}
+    @Resource
+    private ActivityMapper activityMapper;
 
-	@Override
-	@Cacheable(key ="#p0")
-	public Activity findById(Long id) {
-		return activityMapper.selectByPrimaryKey(id);
-	}
+    @Override
+    public List<Activity> queryActivities() {
+        ActivityExample activityExample = new ActivityExample();
+        activityExample.createCriteria().andActivityIdBetween(1000L, 1008L);
+
+        return activityMapper.selectByExample(activityExample);
+    }
+
+    @Override
+    @Cacheable(key ="#p0")
+    public Activity findById(Long id) {
+        return activityMapper.selectByPrimaryKey(id);
+    }
 
 }

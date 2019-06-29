@@ -4,5 +4,5 @@ import com.tan.start.entity.SysUser;
 
 public interface SysUserService {
 
-	public SysUser findByName(String name); 
+    public SysUser findByName(String name);
 }

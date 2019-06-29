@@ -14,8 +14,8 @@ import com.tan.start.config.shiro.FebsProperties;
 @EnableConfigurationProperties({FebsProperties.class})
 public class StartApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StartApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StartApplication.class, args);
+    }
 
 }

@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface SysPermissionService {
 
-	public List<String> findPermissionsByRoleId(Integer roleId);
+    public List<String> findPermissionsByRoleId(Integer roleId);
 }
