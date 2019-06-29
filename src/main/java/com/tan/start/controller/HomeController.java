@@ -5,6 +5,8 @@ import com.tan.start.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.session.SessionException;
+import org.apache.shiro.session.StoppedSessionException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 //import com.tan.start.annotation.Thinking;
@@ -37,7 +40,7 @@ public class HomeController {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         logger.info("principal={}",user);
         modelAndView.setViewName("index");
-        modelAndView.addObject("user",request.getSession().getAttribute("user"));
+        modelAndView.addObject("user",user.getUsername());
         return modelAndView;
     }
 
@@ -75,7 +78,6 @@ public class HomeController {
             }
 
         }
-        request.getSession().setAttribute("user",username.trim());
         modelAndView.setViewName("redirect:index");
         return modelAndView;
 
@@ -83,9 +85,13 @@ public class HomeController {
 
     @RequestMapping(value = "/logout",method = {RequestMethod.GET,RequestMethod.POST})
     public String logout(HttpServletRequest request){
-        realm.clearCache();
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            realm.clearCache();
+        }catch (IllegalStateException ise){
+            logger.debug(ise.getMessage());
+        }
         return "redirect:login";
     }
 }
