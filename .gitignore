@@ -2,4 +2,6 @@ log/
 target/
 .idea/
 .settings/
-src/main/resources/static
+#src/main/resources/static
+**/static/**/*.map
+**/assets/node_modules

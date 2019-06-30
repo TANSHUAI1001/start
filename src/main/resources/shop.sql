@@ -107,7 +107,7 @@ DROP TABLE IF EXISTS `sys_permission_groups`;
 CREATE TABLE `sys_permission_groups` (
   `id` int(11) NOT NULL,
   `value` varchar(50) DEFAULT NULL,
-  `descrpition` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限分组';
 
@@ -201,7 +201,7 @@ CREATE TABLE `sys_user` (
   `username` varchar(100) NOT NULL COMMENT '用户名',
   `password` varchar(255) NOT NULL COMMENT '密码',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
-  `telphone` varchar(50) DEFAULT NULL COMMENT '电话号码',
+  `telephone` varchar(50) DEFAULT NULL COMMENT '电话号码',
   `salt` varchar(100) DEFAULT NULL COMMENT '盐值',
   `single_role` int(11) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,

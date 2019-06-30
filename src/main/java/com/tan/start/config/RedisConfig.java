@@ -12,6 +12,7 @@ import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -40,34 +41,35 @@ public class RedisConfig extends CachingConfigurerSupport{
     private String password;
     @Value("${spring.redis.timeout}")
     private int timeout;
-    @Value("${spring.redis.jedis.pool.max-idle}")
+    @Value("${spring.redis.lettuce.pool.max-idle}")
     private int maxIdle;
-    @Value("${spring.redis.jedis.pool.max-wait}")
+    @Value("${spring.redis.lettuce.pool.max-wait}")
     private long maxWaitMillis;
 
-    @Bean
-    public JedisPool redisPoolFactory() {
-        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxIdle(maxIdle);
-        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
-        if (StringUtils.isNotBlank(password)) {
-            return new JedisPool(jedisPoolConfig, host, port, timeout, password);
-        } else {
-            return new JedisPool(jedisPoolConfig, host, port, timeout, null);
-        }
-    }
+//    @Bean
+//    public JedisPool redisPoolFactory() {
+//        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+//        jedisPoolConfig.setMaxIdle(maxIdle);
+//        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
+//        if (StringUtils.isNotBlank(password)) {
+//            return new JedisPool(jedisPoolConfig, host, port, timeout, password);
+//        } else {
+//            return new JedisPool(jedisPoolConfig, host, port, timeout, null);
+//        }
+//    }
 
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory() {
+    public LettuceConnectionFactory lettuceConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
-        redisStandaloneConfiguration.setPassword(RedisPassword.of(password));
+        if (StringUtils.isNotBlank(password)) {
+            redisStandaloneConfiguration.setPassword(RedisPassword.of(password));
+        }
 
-        JedisClientConfiguration.JedisClientConfigurationBuilder jedisClientConfiguration = JedisClientConfiguration.builder();
-        jedisClientConfiguration.connectTimeout(Duration.ofMillis(timeout));
-        jedisClientConfiguration.usePooling();
-        return new JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration.build());
+        LettuceClientConfiguration.LettuceClientConfigurationBuilder lettuceClientConfiguration = LettuceClientConfiguration.builder();
+        lettuceClientConfiguration.commandTimeout(Duration.ofMillis(timeout));
+        return new LettuceConnectionFactory(redisStandaloneConfiguration, lettuceClientConfiguration.build());
     }
 
     @Bean
