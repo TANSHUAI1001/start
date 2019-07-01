@@ -5,13 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping(value="/")
 public class MenuController {
 
     @Resource(name = "redisTemplate")
-    private RedisTemplate<String, String> template;
+    private RedisTemplate<Object, Object> template;
 
     @RequestMapping(value="/")
     public String defaults() {
@@ -20,7 +21,7 @@ public class MenuController {
 
     @RequestMapping(value="/dashboard")
     public String dashboard() {
-        template.opsForValue().set("start","dashboard");
+        template.opsForValue().set("start","dashboard",60, TimeUnit.SECONDS);
         return "dashboard";
     }
 
