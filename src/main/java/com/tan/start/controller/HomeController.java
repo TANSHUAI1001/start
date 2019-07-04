@@ -12,6 +12,7 @@ import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,12 +36,9 @@ public class HomeController {
     @RequestMapping(value="/index")
     public ModelAndView index(ModelAndView modelAndView,HttpServletRequest request) {
         ShiroHttpSession session = (ShiroHttpSession) request.getSession();
-        Long last = session.getLastAccessedTime();
+        long last = session.getLastAccessedTime();
         logger.info("{} last access time: {}",session.getId(),new Date(last));
-        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        logger.info("principal={}",user);
         modelAndView.setViewName("index");
-        modelAndView.addObject("user",user.getUsername());
         return modelAndView;
     }
 
@@ -52,10 +50,9 @@ public class HomeController {
     }
 
     @RequestMapping(value="/login",method=RequestMethod.GET)
-    public ModelAndView loginPage(ModelAndView modelAndView) {
-        modelAndView.getModel().put("error",null);
-        modelAndView.setViewName("login");
-        return modelAndView;
+    public String loginPage(Model model) {
+        model.addAttribute("error",null);
+        return "login";
     }
 
     @RequestMapping(value="/register",method=RequestMethod.GET)
@@ -64,7 +61,7 @@ public class HomeController {
     }
 
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public ModelAndView login(String username,String password,boolean remembered ,ModelAndView modelAndView,HttpServletRequest request) {
+    public String login(String username,String password,boolean remembered ,Model model,HttpServletRequest request) {
         UsernamePasswordToken token = new UsernamePasswordToken(username.trim(), password.trim(),remembered);
         Subject subject = SecurityUtils.getSubject();
         if (subject != null){
@@ -72,14 +69,11 @@ public class HomeController {
                 subject.logout();
                 subject.login(token);
             }catch (Exception e){
-                modelAndView.getModel().put("error",e.getMessage());
-                modelAndView.setViewName("login");
-                return modelAndView;
+                model.addAttribute("error",e.getMessage());
+                return "login";
             }
-
         }
-        modelAndView.setViewName("redirect:index");
-        return modelAndView;
+        return "redirect:index";
 
     }
 

@@ -12,6 +12,8 @@
 
 在配置文件中Maven build和 eclipse 插件build不一样，maven的基准目录是 ${workspace_loc:/start}不需要加项目名
 
+3. IDEA下使用Maven生成，直接右键配置文件Run maven new goal 命令：mybatis-generator:generate
+
 ```
 maven: targetProject="src/main/java"
 eclipse targetProject="start/src/main/java"

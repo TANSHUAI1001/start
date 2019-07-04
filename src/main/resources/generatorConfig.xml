@@ -62,15 +62,16 @@
     </javaClientGenerator>
 <!--      <table schema="shop" tableName="activity"></table> -->
 <!--     <table schema="shop" tableName="success_record"></table> -->
-	<table schema="shop" tableName="sys_organization"></table>
-	<table schema="shop" tableName="sys_permission"></table>
-	<table schema="shop" tableName="sys_permission_groups"></table>
-	<table schema="shop" tableName="sys_permission_resources"></table>
-	<table schema="shop" tableName="sys_resources"></table>
-	<table schema="shop" tableName="sys_role"></table>
-	<table schema="shop" tableName="sys_role_permission"></table>
-	<table schema="shop" tableName="sys_user"></table>
-	<table schema="shop" tableName="sys_user_permission"></table>
-	<table schema="shop" tableName="sys_user_role"></table>
+<!--	<table schema="shop" tableName="sys_organization"></table>-->
+<!--	<table schema="shop" tableName="sys_permission"></table>-->
+<!--	<table schema="shop" tableName="sys_permission_group" />-->
+<!--	<table schema="shop" tableName="sys_permission_resource" />-->
+	<table schema="shop" tableName="sys_resource" />
+<!--	<table schema="shop" tableName="sys_role"></table>-->
+<!--	<table schema="shop" tableName="sys_role_permission"></table>-->
+<!--	<table schema="shop" tableName="sys_user"></table>-->
+<!--	<table schema="shop" tableName="sys_user_permission"></table>-->
+<!--	<table schema="shop" tableName="sys_user_role"></table>-->
+<!--      <table schema="shop" tableName="fund_data" />-->
   </context>
 </generatorConfiguration>

@@ -99,7 +99,7 @@ febs:
     # 登出 url
     logoutUrl: /logout
     # 未授权跳转 url
-    unauthorizedUrl: /error
+#    unauthorizedUrl: /error
   # 验证码
   validateCode:
     # 宽度，默认 146px

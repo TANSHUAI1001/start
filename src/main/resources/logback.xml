@@ -47,4 +47,8 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
+    <logger name="com.tan.start.aspect" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
 </configuration>  

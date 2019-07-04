@@ -1,8 +1,10 @@
 package com.tan.start.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -15,29 +17,39 @@ public class MenuController {
     private RedisTemplate<Object, Object> template;
 
     @RequestMapping(value="/")
-    public String defaults() {
-        return "redirect:index";
+    public ModelAndView defaults(ModelAndView modelAndView) {
+        modelAndView.setViewName("redirect:index");
+        return modelAndView;
     }
 
     @RequestMapping(value="/dashboard")
-    public String dashboard() {
-        template.opsForValue().set("start","dashboard",60, TimeUnit.SECONDS);
-        return "dashboard";
+    public ModelAndView dashboard(ModelAndView modelAndView) {
+        template.opsForValue().set("shiro:start","dashboard",60, TimeUnit.SECONDS);
+        modelAndView.setViewName("dashboard");
+        modelAndView.addObject("active","/dashboard");
+        return modelAndView;
     }
 
     @RequestMapping(value="/profile")
-    public String profile() {
-        System.out.println(template.opsForValue().get("start"));
-        return "profile";
+    public ModelAndView profile(ModelAndView modelAndView) {
+        System.out.println(template.opsForValue().get("shiro:start"));
+        modelAndView.setViewName("profile");
+        modelAndView.addObject("active","/profile");
+        return modelAndView;
     }
 
-    @RequestMapping(value="/user")
-    public String index1() {
-        return "index1";
+    @RequestMapping(value="/management/user")
+    public ModelAndView index1(ModelAndView modelAndView) {
+        modelAndView.setViewName("index1");
+        modelAndView.addObject("active","/management/user");
+        return modelAndView;
     }
 
-    @RequestMapping(value="/resource")
-    public String index2() {
-        return "index2";
+    @RequestMapping(value="/management/resource")
+    @RequiresRoles("admin")
+    public ModelAndView index2(ModelAndView modelAndView) {
+        modelAndView.setViewName("index2");
+        modelAndView.addObject("active","/management/resource");
+        return modelAndView;
     }
 }
