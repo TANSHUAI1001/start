@@ -8,6 +8,7 @@ public class PageParam {
     private Integer length;
     private Column[] columns;
     private Order[] order;
+    private Search search;
 
     public Integer getDraw() {
         return draw;
@@ -47,6 +48,14 @@ public class PageParam {
 
     public void setOrder(Order[] order) {
         this.order = order;
+    }
+
+    public Search getSearch() {
+        return search;
+    }
+
+    public void setSearch(Search search) {
+        this.search = search;
     }
 }
 

@@ -103,15 +103,15 @@
 var fix_data_format = function(d){
     var convert = {};
     for(var item in d){
-      if(d[item] instanceof Array){ // 数组层
+      if(typeof(d[item]) == "object"){ // 对象层（或数组）
         //console.log(d[item]);
         var arr = d[item];
-        for(var arrIndex in arr){ // 数组内嵌一层
+        for(var arrIndex in arr){ // 对象内嵌一层
           //console.log(arrIndex,arr[arrIndex]);
           if(typeof( arr[arrIndex]) == "object"){
-              for(var arrItem in arr[arrIndex]){ // 数组内嵌二层
+              for(var arrItem in arr[arrIndex]){ // 对象内嵌二层
               if(typeof( arr[arrIndex][arrItem]) == "object"){
-                for(var sub in arr[arrIndex][arrItem]){ // 数组内嵌二层所有属性
+                for(var sub in arr[arrIndex][arrItem]){ // 对象内嵌二层所有属性
                   convert[item+"["+arrIndex+"]."+arrItem+"."+sub] = arr[arrIndex][arrItem][sub];
                 }
               }else{
@@ -119,7 +119,7 @@ var fix_data_format = function(d){
               }
              }
          }else{
-          convert[item+"["+arrIndex+"]"] = arr[arrIndex];
+          convert[item+"."+arrIndex] = arr[arrIndex];
          }
 
         }
