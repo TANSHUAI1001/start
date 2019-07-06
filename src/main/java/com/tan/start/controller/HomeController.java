@@ -37,7 +37,7 @@ public class HomeController {
     }
 
     @RequestMapping(value="/test")
-    @RequiresPermissions("queryall")
+    @RequiresPermissions("query_all")
     public String test(HttpServletRequest request,HttpServletResponse response) {
         logger.debug("test  format arg {}", "100");
         return "sub/test";

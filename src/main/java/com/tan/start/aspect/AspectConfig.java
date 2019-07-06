@@ -72,11 +72,11 @@ public class AspectConfig {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         result.addObject("user",user.getUsername());
         //支持多级菜单生成
-        List<Menu>menus = (List<Menu>) template.opsForValue().get("menu:all");
+        List<Menu>menus = (List<Menu>) template.opsForValue().get("menu:"+user.getSingleRole());
         if(menus == null) {
-            List<SysResource> resources = sysResourcesService.getMenu();
+            List<SysResource> resources = sysResourcesService.getMenuByRole(user.getSingleRole());
             menus = GenerateTreeFromList.generateTree(resources);
-            template.opsForValue().set("menu:all", menus);
+            template.opsForValue().set("menu:"+user.getSingleRole(), menus);
         }
         result.addObject("menus", menus);
         logger.debug("result: {}",result);

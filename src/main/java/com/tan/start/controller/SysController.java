@@ -21,7 +21,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequiresRoles("admin")
 @RequestMapping("/sys")
 public class SysController {
 
@@ -33,23 +32,32 @@ public class SysController {
     private SysResourceService sysResourceService;
 
     @RequestMapping("/user")
-    public ResponseResult getUser(){
-        PageHelper.startPage(1,10);
+    public ResponseResult getUser(PageParam pageParam){
+//        PageHelper.startPage(1,10);
+        PageHelper.offsetPage(pageParam.getStart(),pageParam.getLength());
         List<SysUser> sysUsers = sysUserService.queryAll();
         List<SysUserVO> users = BaseVO.convertList(sysUsers,SysUserVO.class);
         logger.debug("total:{},pages:{}",((Page) sysUsers).getTotal(),((Page) sysUsers).getPages());
-        return ResponseResult.ok().put("data",users);
+        return ResponseResult.ok().put("data",users).
+                put("draw",pageParam.getDraw()).
+                put("start",pageParam.getStart()).
+                put("length",pageParam.getLength()).
+                put("recordsTotal",((Page) sysUsers).getTotal()).
+                put("recordsFiltered",((Page) sysUsers).getTotal());
     }
 
     @RequestMapping("/resource")
+    @RequiresRoles("admin")
     public ResponseResult getResource(PageParam pageParam){
-        PageHelper.startPage(1,3);
-//        PageHelper.offsetPage(start,length);
+//        PageHelper.startPage(1,3);
+        PageHelper.offsetPage(pageParam.getStart(),pageParam.getLength());
         List<SysResource> resources = sysResourceService.queryAll();
         long total = ((Page) resources).getTotal();
-        logger.info("total:{}",total);
         return ResponseResult.ok().put("data",resources).
-                put("draw",pageParam.getDraw()).put("start",pageParam.getStart()).put("length",pageParam.getLength()).
-                put("recordsTotal",total*10).put("recordsFiltered",total*10);
+                put("draw",pageParam.getDraw()).
+                put("start",pageParam.getStart()).
+                put("length",pageParam.getLength()).
+                put("recordsTotal",total*10).
+                put("recordsFiltered",total*10);
     }
 }

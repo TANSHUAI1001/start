@@ -6,7 +6,9 @@ import java.util.List;
 
 
 public interface SysResourceService {
-    public List<SysResource> getMenu();
+    List<SysResource> getMenu();
+
+    List<SysResource> getMenuByRole(Integer roleId);
 
     List<SysResource> queryAll();
 }

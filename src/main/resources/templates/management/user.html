@@ -5,6 +5,9 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">用户管理</h3>
+            <@shiro.hasPermission  name="query_all">
+                query all
+            </@shiro.hasPermission>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
