@@ -1,4 +1,4 @@
 package com.tan.start.exception;
 
-public class CommonException {
+public class CommonException extends Exception{
 }

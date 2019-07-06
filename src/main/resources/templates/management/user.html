@@ -1,0 +1,24 @@
+<#include "/includes/basic_layout.ftl">
+
+<@BasicLayout>
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">用户管理</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example" class="table table-bordered table-striped">
+
+            </table>
+        </div>
+    </div>
+</section>
+</@BasicLayout>
+<script src="/moment/moment.min.js"></script>
+<script src="/assets/management/user.js"></script>
+<script>
+    $(function(){
+      ManagementUser.load();
+     })
+</script>

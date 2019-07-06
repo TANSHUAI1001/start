@@ -2,7 +2,11 @@ package com.tan.start.service;
 
 import com.tan.start.entity.SysUser;
 
+import java.util.List;
+
 public interface SysUserService {
 
-    public SysUser findByName(String name);
+    SysUser findByName(String name);
+
+    List<SysUser> queryAll();
 }

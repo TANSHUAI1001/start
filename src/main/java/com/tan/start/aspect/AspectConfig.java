@@ -2,7 +2,7 @@ package com.tan.start.aspect;
 
 import com.tan.start.entity.SysResource;
 import com.tan.start.entity.SysUser;
-import com.tan.start.service.SysResourcesService;
+import com.tan.start.service.SysResourceService;
 import com.tan.start.utils.GenerateTreeFromList;
 import com.tan.start.utils.Menu;
 import org.apache.shiro.SecurityUtils;
@@ -26,7 +26,7 @@ import java.util.List;
 public class AspectConfig {
     Logger logger = LoggerFactory.getLogger(AspectConfig.class);
     @Resource
-    private SysResourcesService sysResourcesService;
+    private SysResourceService sysResourcesService;
     @Resource(name = "redisTemplate")
     private RedisTemplate<Object, Object> template;
 
@@ -67,7 +67,6 @@ public class AspectConfig {
      * @throws Throwable
      */
     @Around("method()")
-    @SuppressWarnings("unchecked")
     public Object  doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         ModelAndView result = (ModelAndView) proceedingJoinPoint.proceed();
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();

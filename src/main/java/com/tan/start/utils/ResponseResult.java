@@ -7,11 +7,11 @@ public class ResponseResult extends HashMap<String, Object> {
     private static final long serialVersionUID = -8713837118340960775L;
 
     // 成功
-    private static final Integer SUCCESS = 0;
+    private static final Integer SUCCESS = 1;
     // 警告
-    private static final Integer WARN = 1;
+    private static final Integer WARN = 2;
     // 异常 失败
-    private static final Integer FAIL = 500;
+    private static final Integer FAIL = 0;
 
     public ResponseResult() {
         put("code", SUCCESS);
@@ -22,6 +22,7 @@ public class ResponseResult extends HashMap<String, Object> {
         ResponseResult responseResult = new ResponseResult();
         responseResult.put("code", FAIL);
         responseResult.put("msg", msg);
+        responseResult.put("error",msg);
         return responseResult;
     }
 

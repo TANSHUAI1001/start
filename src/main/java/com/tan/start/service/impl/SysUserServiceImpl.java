@@ -16,15 +16,24 @@ public class SysUserServiceImpl implements SysUserService{
     @Autowired
     private SysUserMapper sysUserMapper;
 
+    private SysUserExample example = new SysUserExample();
+
     @Override
     public SysUser findByName(String name) {
-        SysUserExample example = new SysUserExample();
         example.createCriteria().andUsernameEqualTo(name).andStateEqualTo(1);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(example);
+        example.clear();
         if(sysUsers.size() > 0){
             return sysUsers.get(0);
         }
        return null;
+    }
+
+    @Override
+    public List<SysUser> queryAll() {
+        example.setOrderByClause("id asc,state desc");
+        System.out.println(example.getOredCriteria());
+        return sysUserMapper.selectByExample(example);
     }
 
 }

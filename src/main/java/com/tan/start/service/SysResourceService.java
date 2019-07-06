@@ -5,6 +5,8 @@ import com.tan.start.entity.SysResource;
 import java.util.List;
 
 
-public interface SysResourcesService {
+public interface SysResourceService {
     public List<SysResource> getMenu();
+
+    List<SysResource> queryAll();
 }

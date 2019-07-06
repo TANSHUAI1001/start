@@ -4,7 +4,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
@@ -132,7 +132,7 @@
 
                             <p>
                                     ${user}
-                                <small>Member since Nov. 2019</small>
+                                <small>Member since Feb. 2019</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -153,10 +153,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="/profile" class="btn btn-default btn-flat">个人信息</a>
                             </div>
                             <div class="pull-right">
-                                <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/logout" class="btn btn-default btn-flat">退出</a>
                             </div>
                         </li>
                     </ul>

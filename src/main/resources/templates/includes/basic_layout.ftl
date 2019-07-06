@@ -31,8 +31,8 @@
         <![endif]-->
 
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<#--    <link rel="stylesheet"-->
+<#--          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -71,7 +71,67 @@
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.min.js"></script>
+<!-- DataTables -->
+<script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $.fn.dataTable.defaults.oLanguage = {
+    "sProcessing": "处理中...",
+    "sLengthMenu": "每页显示 _MENU_ 条记录",
+    "sZeroRecords": "没有匹配结果",
+    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+    "sInfoPostFix": "",
+    "sSearch": "搜索：",
+    "sUrl": "",
+    "sEmptyTable": "表中数据为空",
+    "sLoadingRecords": "载入中...",
+    "sInfoThousands": ",",
+    "oPaginate": {
+        "sFirst": "首页",
+        "sPrevious": "上页",
+        "sNext": "下页",
+        "sLast": "末页"
+    },
+    "oAria": {
+        "sSortAscending": ": 升序",
+        "sSortDescending": ": 降序"
+    }
+};
 
+var fix_data_format = function(d){
+    var convert = {};
+    for(var item in d){
+      if(d[item] instanceof Array){ // 数组层
+        //console.log(d[item]);
+        var arr = d[item];
+        for(var arrIndex in arr){ // 数组内嵌一层
+          //console.log(arrIndex,arr[arrIndex]);
+          if(typeof( arr[arrIndex]) == "object"){
+              for(var arrItem in arr[arrIndex]){ // 数组内嵌二层
+              if(typeof( arr[arrIndex][arrItem]) == "object"){
+                for(var sub in arr[arrIndex][arrItem]){ // 数组内嵌二层所有属性
+                  convert[item+"["+arrIndex+"]."+arrItem+"."+sub] = arr[arrIndex][arrItem][sub];
+                }
+              }else{
+               convert[item+"["+arrIndex+"]."+arrItem] = arr[arrIndex][arrItem];
+              }
+             }
+         }else{
+          convert[item+"["+arrIndex+"]"] = arr[arrIndex];
+         }
+
+        }
+      }else{
+        convert[item] = d[item];
+      }
+    }
+    //console.log(d);
+    //console.log(convert);
+    return convert;
+  }
+</script>
 </body>
 </html>
 </#macro>
