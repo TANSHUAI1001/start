@@ -43,12 +43,12 @@
     <!--<logger name="com.tan.start.dao" level="DEBUG" />-->
 
     <!--只设置DEBUG时控制台输出mybatis的SQL语句 additivity="false"不向上传递，避免同一语句在控制台输出两次 -->
-    <logger name="com.tan.start.dao" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT" />
-    </logger>
+<!--    <logger name="com.tan.start.dao" level="DEBUG" additivity="false">-->
+<!--        <appender-ref ref="STDOUT" />-->
+<!--    </logger>-->
 
-    <logger name="com.tan.start.aspect" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT" />
-    </logger>
+<!--    <logger name="com.tan.start.aspect" level="DEBUG" additivity="false">-->
+<!--        <appender-ref ref="STDOUT" />-->
+<!--    </logger>-->
 
 </configuration>  

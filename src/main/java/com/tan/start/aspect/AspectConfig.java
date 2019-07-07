@@ -71,6 +71,7 @@ public class AspectConfig {
         ModelAndView result = (ModelAndView) proceedingJoinPoint.proceed();
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         result.addObject("user",user.getUsername());
+        result.addObject("avatar",user.getAvatar());
         //支持多级菜单生成
         List<Menu>menus = (List<Menu>) template.opsForValue().get("menu:"+user.getSingleRole());
         if(menus == null) {

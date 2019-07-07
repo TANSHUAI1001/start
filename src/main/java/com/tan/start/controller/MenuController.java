@@ -22,6 +22,13 @@ public class MenuController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/fund")
+    public ModelAndView fund(ModelAndView modelAndView) {
+        modelAndView.setViewName("index");
+        modelAndView.addObject("active","/fund");
+        return modelAndView;
+    }
+
     @RequestMapping(value="/profile")
     public ModelAndView profile(ModelAndView modelAndView) {
         modelAndView.setViewName("profile");

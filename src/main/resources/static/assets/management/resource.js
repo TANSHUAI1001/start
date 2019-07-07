@@ -6,8 +6,12 @@ var ManagementResource = function(){
                   url:"/sys/resource",
                   data:fix_data_format
                 },
+                'autoWidth':false,
                 columns: [
-                    {title:"ID",data:"id"},
+                    {title:"序号",render:function(data,type,row,meta){
+//                      console.log(data,type,row,meta)
+                      return meta.row+1;
+                    }},
                     {title:"名称",data:"name"},
                     {title:"描述",data:"description"},
                     {title:"类型",data:"type"},

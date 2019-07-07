@@ -6,6 +6,7 @@ var ManagementUser = function(){
               url:"/sys/user",
               data:fix_data_format
             },
+            'autoWidth':false,
             columns: [
                 {title:"ID",data:"id"},
                 {title:"用户名",data:"username"},

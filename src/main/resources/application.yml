@@ -37,11 +37,11 @@ spring:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/shop?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
       driver-class-name: com.mysql.cj.jdbc.Driver
-      initial-size: 5
+      initial-size: 30
       min-idle: 5
-      max-active: 10
-      max-wait: 10000
-      max-create-task-count: 10
+      max-active: 50
+      max-wait: 100000
+      max-create-task-count: 50
       web-stat-filter:
         enabled: true
         url-pattern: /*

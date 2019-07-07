@@ -1,18 +1,15 @@
 package com.tan.start.config.shiro;
 
+import com.alibaba.fastjson.JSON;
+import com.tan.start.utils.HttpUtils;
+import com.tan.start.utils.ResponseResult;
+import org.apache.shiro.web.filter.authc.UserFilter;
+import org.springframework.http.HttpStatus;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.web.filter.authc.LogoutFilter;
-import org.apache.shiro.web.filter.authc.UserFilter;
-import org.apache.shiro.web.filter.authz.AuthorizationFilter;
-import org.springframework.http.HttpStatus;
-
-import com.alibaba.fastjson.JSON;
-import com.tan.start.utils.HttpUtils;
-import com.tan.start.utils.ResponseResult;
 
 public class CustomUserFilter extends UserFilter {
 

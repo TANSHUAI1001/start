@@ -26,6 +26,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     @Override
     public List<SysResource> getMenu() {
         example.createCriteria().andTypeEqualTo("menu").andStateEqualTo(1);
+        example.setOrderByClause("level asc,priority asc");
         List<SysResource> menus = sysResourcesMapper.selectByExample(example);
         example.clear();
         return menus;
@@ -38,7 +39,8 @@ public class SysResourceServiceImpl implements SysResourceService {
         List<SysRoleResource> sysRoleResources = sysRoleResourceMapper.selectByExample(sysRoleResourceExample);
         List<Long> resourceIds = sysRoleResources.stream().map(SysRoleResource::getResourceId).collect(Collectors.toList());
         sysRoleResourceExample.clear();
-        example.createCriteria().andIdIn(resourceIds);
+        example.createCriteria().andTypeEqualTo("menu").andStateEqualTo(1).andIdIn(resourceIds);
+        example.setOrderByClause("level asc,priority asc");
         List<SysResource> resources = sysResourcesMapper.selectByExample(example);
         example.clear();
         return resources;

@@ -28,6 +28,7 @@ import com.tan.start.entity.SysUser;
 import com.tan.start.service.SysPermissionService;
 import com.tan.start.service.SysRoleService;
 import com.tan.start.service.SysUserService;
+import org.springframework.util.DigestUtils;
 
 //@Component("shiroRealm")
 //TODO 自定义实现
@@ -80,8 +81,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
         // 获取用户输入的用户名和密码
         String userName = (String) token.getPrincipal();
-        String password = new String((char[]) token.getCredentials());
-        
+        String originPassword = new String((char[]) token.getCredentials());
         // simple implement
 //        Map<String,SimpleUser> localUsers = new HashMap<>();
 //        SimpleUser user1 = new SimpleUser("joe.coder","password");
@@ -103,14 +103,16 @@ public class ShiroRealm extends AuthorizingRealm {
         if(user == null){
             throw new UnknownAccountException("账号信息错误！");
         }
+
+        String md5PasswordWithSalt = DigestUtils.md5DigestAsHex((originPassword+user.getSalt()).getBytes());
 //        SimpleUser user = new SimpleUser(sysUser);
 //        if (user == null)
 //            throw new UnknownAccountException("用户名或密码错误！");
-        if (!password.equals(user.getPassword()))
+        if (!md5PasswordWithSalt.equals(user.getPassword()))
             throw new IncorrectCredentialsException("用户名或密码错误！");
         if (new Integer(-1).equals(user.getState()))
             throw new LockedAccountException("账号已被锁定,请联系管理员！");
-        return new SimpleAuthenticationInfo(user, password, getName());
+        return new SimpleAuthenticationInfo(user, originPassword, getName()); // 此处要放login传进来的密码
         
     }
 
