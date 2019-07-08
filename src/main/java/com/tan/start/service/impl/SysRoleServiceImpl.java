@@ -2,6 +2,7 @@ package com.tan.start.service.impl;
 
 import java.util.List;
 
+import com.tan.start.entity.SysRoleExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,13 @@ public class SysRoleServiceImpl implements SysRoleService{
     @Override
     public SysRole findBySingleRole(Integer singleRoleId) {
         return sysRoleMapper.selectByPrimaryKey(singleRoleId);
+    }
+
+    @Override
+    public List<SysRole> queryAll() {
+        SysRoleExample example = new SysRoleExample();
+        example.createCriteria().andStateEqualTo(1);
+        return sysRoleMapper.selectByExample(example);
     }
 
 }

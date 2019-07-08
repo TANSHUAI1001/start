@@ -1,0 +1,32 @@
+<#include "/includes/basic_layout.ftl">
+
+<@BasicLayout title="基金数据">
+<section class="content-header">
+    <h1>
+        基金数据
+    </h1>
+</section>
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!--                <div class="box-header">-->
+                <!--                    <h3 class="box-title">基金数据</h3>-->
+                <!--                </div>-->
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example" class="table table-bordered table-striped">
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</@BasicLayout>
+<script src="/assets/fund_data.js"></script>
+<script>
+    $(function(){
+      FundData.load();
+     })
+</script>

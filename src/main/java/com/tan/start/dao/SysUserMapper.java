@@ -1,5 +1,6 @@
 package com.tan.start.dao;
 
+import com.tan.start.dto.SysUserDTO;
 import com.tan.start.entity.SysUser;
 import com.tan.start.entity.SysUserExample;
 import java.util.List;
@@ -93,4 +94,6 @@ public interface SysUserMapper {
      * @mbg.generated Sun Jul 07 00:26:28 CST 2019
      */
     int updateByPrimaryKey(SysUser record);
+
+    List<SysUserDTO> selectUserInfoByExample(SysUserExample example);
 }

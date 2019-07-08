@@ -9,4 +9,6 @@ public interface SysRoleService {
     public List<SysRole> findByUserId(Long userId);
 
     public SysRole findBySingleRole(Integer singleRoleId);
+
+    List<SysRole> queryAll();
 }

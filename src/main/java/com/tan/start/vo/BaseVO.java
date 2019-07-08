@@ -1,4 +1,4 @@
-package com.tan.start.view;
+package com.tan.start.vo;
 
 import org.apache.commons.beanutils.BeanUtils;
 

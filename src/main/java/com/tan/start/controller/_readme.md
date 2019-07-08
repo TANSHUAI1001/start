@@ -1,0 +1,3 @@
+HomeController和MenuController以及CustomErrorController
+需返回ModelAndView，
+其他皆是@RestController返回JSON格式

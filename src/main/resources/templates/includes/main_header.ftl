@@ -25,7 +25,7 @@
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
+<#--                        <span class="label label-success">4</span>-->
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 4 messages</li>
@@ -36,7 +36,7 @@
                                     <a href="#">
                                         <div class="pull-left">
                                             <!-- User Image -->
-                                            <img src="${avatar}" class="img-circle" alt="User Image">
+                                            <img src="${user.avatar}" class="img-circle" alt="User Image">
                                         </div>
                                         <!-- Message title and timestamp -->
                                         <h4>
@@ -61,7 +61,7 @@
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+<#--                        <span class="label label-warning">10</span>-->
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 10 notifications</li>
@@ -84,7 +84,7 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-flag-o"></i>
-                       <span class="label label-danger">9</span>
+<#--                       <span class="label label-danger">9</span>-->
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 9 tasks</li>
@@ -121,17 +121,17 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="${avatar}" class="user-image" alt="User Image">
+                        <img src="${user.avatar}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">${user!}</span>
+                        <span class="hidden-xs">${user.username}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="${avatar}" class="img-circle" alt="User Image">
+                            <img src="${user.avatar}" class="img-circle" alt="User Image">
 
                             <p>
-                                    ${user}
+                                    ${user.username}
                                 <small>Member since Feb. 2019</small>
                             </p>
                         </li>

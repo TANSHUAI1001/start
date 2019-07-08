@@ -1,5 +1,7 @@
 package com.tan.start.utils;
 
+import com.tan.start.utils.datatable.PageParam;
+
 import java.util.HashMap;
 
 public class ResponseResult extends HashMap<String, Object> {
@@ -13,30 +15,44 @@ public class ResponseResult extends HashMap<String, Object> {
     // 异常 失败
     private static final Integer FAIL = 0;
 
+    public static final String CODE = "code";
+    public static final String MSG = "msg";
+    public static final String DATA = "data";
+    public static final String ERROR = "error";
+    public static final String SUCCESS_MSG = "操作成功!";
+    public static final String FAIL_MSG = "操作失败!";
+
+    public static final String DRAW = "draw";
+    public static final String START = "start";
+    public static final String LENGTH = "length";
+    public static final String RECORDS_TOTAL = "recordsTotal";
+    public static final String RECORDS_FILTERED = "recordsFiltered";
+
+
     public ResponseResult() {
-        put("code", SUCCESS);
-        put("msg", "操作成功");
+        put(CODE, SUCCESS);
+        put(MSG, SUCCESS_MSG);
     }
 
     public static ResponseResult error(Object msg) {
         ResponseResult responseResult = new ResponseResult();
-        responseResult.put("code", FAIL);
-        responseResult.put("msg", msg);
-        responseResult.put("error",msg);
+        responseResult.put(CODE, FAIL);
+        responseResult.put(MSG, msg);
+        responseResult.put(ERROR,msg);
         return responseResult;
     }
 
     public static ResponseResult warn(Object msg) {
         ResponseResult responseResult = new ResponseResult();
-        responseResult.put("code", WARN);
-        responseResult.put("msg", msg);
+        responseResult.put(CODE, WARN);
+        responseResult.put(MSG, msg);
         return responseResult;
     }
 
     public static ResponseResult ok(Object msg) {
         ResponseResult responseResult = new ResponseResult();
-        responseResult.put("code", SUCCESS);
-        responseResult.put("msg", msg);
+        responseResult.put(CODE, SUCCESS);
+        responseResult.put(MSG, msg);
         return responseResult;
     }
 
@@ -45,12 +61,18 @@ public class ResponseResult extends HashMap<String, Object> {
     }
 
     public static ResponseResult error() {
-        return ResponseResult.error("");
+        return ResponseResult.error(FAIL_MSG);
     }
 
-    @Override
-    public ResponseResult put(String key, Object value) {
+    public ResponseResult putAttr(String key, Object value) {
         super.put(key, value);
+        return this;
+    }
+
+    public ResponseResult putBaseAttr(PageParam pageParam) {
+        super.put(DRAW, pageParam.getDraw());
+        super.put(START, pageParam.getStart());
+        super.put(LENGTH, pageParam.getLength());
         return this;
     }
 }

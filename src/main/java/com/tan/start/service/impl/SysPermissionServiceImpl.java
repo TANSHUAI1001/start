@@ -36,4 +36,11 @@ public class SysPermissionServiceImpl implements SysPermissionService{
         return permissions.stream().map(SysPermission::getValue).collect(Collectors.toList());
     }
 
+    @Override
+    public List<SysPermission> queryAll() {
+        SysPermissionExample permissionExample = new SysPermissionExample();
+        permissionExample.createCriteria().andStateEqualTo(1);
+        return sysPermissionMapper.selectByExample(permissionExample);
+    }
+
 }

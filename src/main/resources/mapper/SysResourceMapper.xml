@@ -347,4 +347,46 @@
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectSysResourceByRoleId" parameterType="map" resultMap="BaseResultMap">
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    sys_resource.id, sys_resource.name, sys_resource.description, sys_resource.type, sys_resource.level,
+    sys_resource.parent, sys_resource.classes, sys_resource.priority, sys_resource.state
+    from sys_resource join sys_permission_resource on sys_resource.id = sys_permission_resource.resource_id
+    join sys_role_permission on sys_role_permission.permission_id = sys_permission_resource.permission_id
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+          </if>
+        </foreach>
+      and sys_role_permission.role_id = #{roleId}
+      </trim>
+    </where>
+    <if test="example.orderByClause != null">
+      order by ${example.orderByClause}
+    </if>
+  </select>
 </mapper>

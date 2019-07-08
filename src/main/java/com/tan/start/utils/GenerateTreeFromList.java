@@ -15,12 +15,17 @@ public class GenerateTreeFromList {
         for (SysResource item:list) {
             map.put(item.getId().toString(),new Menu(item));
         }
-        for (SysResource item:list) {
+        for (SysResource item:list) { // list按level排序，没有配置parent直接升级item位置
             if("1".equals(item.getLevel())){
                 trees.add(map.get(item.getId().toString()));
             }else {
                 Menu tmp = map.get(item.getParent());
-                tmp.getSub().add(map.get(item.getId().toString()));
+                if(tmp != null && tmp.getSub() != null){
+                    tmp.getSub().add(map.get(item.getId().toString()));
+                }else{
+                    trees.add(map.get(item.getId().toString()));
+                }
+
             }
         }
         return trees;

@@ -1,7 +1,249 @@
 <#include "/includes/basic_layout.ftl">
 
-<@BasicLayout>
-<section class="content container-fluid">
-my profile test content
+<@BasicLayout title="个人信息">
+<section class="content-header">
+    <h1>
+        个人信息
+    </h1>
 </section>
+<section class="content container-fluid">
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="${user.avatar}" alt="User profile picture">
+
+                    <h3 class="profile-username text-center">${user.username}</h3>
+
+                    <p class="text-muted text-center">Software Engineer</p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Followers</b> <a class="pull-right">1,322</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Following</b> <a class="pull-right">543</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Friends</b> <a class="pull-right">13,287</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+            <!-- About Me Box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">About Me</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+
+                    <p class="text-muted">
+                        B.S. in Computer Science from the University of Tennessee at Knoxville
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                    <p class="text-muted">Malibu, California</p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+
+                    <p>
+                        <span class="label label-danger">UI</span>
+                        <span class="label label-success">Coding</span>
+                        <span class="label label-info">Javascript</span>
+                        <span class="label label-warning">Java</span>
+                        <span class="label label-primary">Node.js</span>
+                    </p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#activity" data-toggle="tab">活动</a></li>
+                    <li><a href="#reset-password" data-toggle="tab">修改密码</a></li>
+                    <li><a href="#settings" data-toggle="tab">设置</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="activity">
+                        <div class="row">
+                            <div class="col-lg-12 col-xs-12">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3>4</h3>
+
+                                        <p>Messages</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xs-12">
+                                <!-- small box -->
+                                <div class="small-box bg-red">
+                                    <div class="inner">
+                                        <h3>10</h3>
+
+                                        <p>Notifications</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="glyphicon glyphicon-bell"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xs-12">
+                                <!-- small box -->
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3>9</h3>
+
+                                        <p>Tasks</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-flag"></i>
+                                    </div>
+                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="reset-password">
+                        <form class="form-horizontal" id="resetPasswordForm">
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-sm-2 control-label">原始密码</label>
+
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="原始密码" required autocomplete="off">
+                                    <input type="hidden" class="form-control" id="password" name="password" placeholder="原始密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputNewPassword" class="col-sm-2 control-label">新密码</label>
+
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputNewPassword" placeholder="新密码" required autocomplete="off" min="6">
+                                    <input type="hidden" class="form-control" id="newPassword" name="newPassword" placeholder="新密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputConfirmPassword" class="col-sm-2 control-label">确认新密码</label>
+
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputConfirmPassword" placeholder="确认新密码" required autocomplete="off">
+                                    <input type="hidden" class="form-control" id="confirmPassword" placeholder="新密码">
+                                </div>
+                            </div>
+                            <div class="form-group" style="height:72px">
+                                <div class="col-sm-offset-2 col-sm-2">
+                                    <button type="submit" class="btn btn-primary">修改</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.tab-pane -->
+
+                    <div class="tab-pane" id="settings">
+                        <form class="form-horizontal" id="modifyUserInfoForm">
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required autocomplete="off" value="${user.email}">
+                                    <input type="hidden" class="form-control" id="preEmail" placeholder="Email" value="${user.email}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">修改</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal modal-success fade" id="modal-info">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body" id="success-msg">
+                <p>修改成功！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal modal-danger fade" id="modal-danger">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">错误</h4>
+            </div>
+            <div class="modal-body" id="danger-msg">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 </@BasicLayout>
+<style>
+    .form-error{
+     border-color: red;
+    }
+ </style>
+<script src="/crypto/crypto-js.min.js"></script>
+<script src="/assets/profile.js"></script>

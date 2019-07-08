@@ -12,7 +12,7 @@ var ManagementUser = function(){
                 {title:"用户名",data:"username"},
                 {title:"联系电话",data:"telephone"},
                 {title:"Email",data:"email"},
-                {title:"salt",data:"salt"},
+                {title:"角色",data:"roleName"},
                 {title:"创建时间",data:"createTime",render:function(data,type,row,meta){
                   return moment(data).format('YYYY-MM-DD HH:mm:ss');
                 }},

@@ -93,4 +93,6 @@ public interface SysResourceMapper {
      * @mbg.generated Thu Jul 04 17:33:53 CST 2019
      */
     int updateByPrimaryKey(SysResource record);
+
+    List<SysResource> selectSysResourceByRoleId(@Param("example")SysResourceExample example, @Param("roleId")Integer roleId);
 }

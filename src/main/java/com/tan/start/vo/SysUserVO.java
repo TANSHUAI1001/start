@@ -1,12 +1,9 @@
-package com.tan.start.view;
+package com.tan.start.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tan.start.entity.SysUser;
-import org.apache.commons.beanutils.BeanUtils;
+import com.tan.start.utils.RSAUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
-import java.util.List;
 
 public class SysUserVO{
     private Long id;

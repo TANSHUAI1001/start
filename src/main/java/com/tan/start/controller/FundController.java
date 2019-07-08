@@ -23,11 +23,10 @@ public class FundController {
         PageHelper.offsetPage(pageParam.getStart(),pageParam.getLength());
         List<FundData> fundDataList = fundService.queryAll();
         long total = ((Page) fundDataList).getTotal();
-        return ResponseResult.ok().put("data",fundDataList).
-                put("draw",pageParam.getDraw()).
-                put("start",pageParam.getStart()).
-                put("length",pageParam.getLength()).
-                put("recordsTotal",total).
-                put("recordsFiltered",total);
+        return ResponseResult.ok().
+                putBaseAttr(pageParam).
+                putAttr(ResponseResult.DATA,fundDataList).
+                putAttr(ResponseResult.RECORDS_TOTAL,total).
+                putAttr(ResponseResult.RECORDS_FILTERED,total);
     }
 }
