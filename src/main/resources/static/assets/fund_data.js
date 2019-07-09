@@ -6,10 +6,10 @@ var FundData = function(){
                   url:"/api/fund",
                   data:fix_data_format
                 },
-                'searching':false,
-                'ordering':true,
-                'autoWidth':false,
-                "formatNumber": function ( toFormat ) {
+                searching: false,
+                ordering: true,
+                autoWidth: false,
+                formatNumber: function ( toFormat ) {
                      //使用正则表达式匹配，替换数字
                     return toFormat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                  }, // 解决自带解析数字设置自定义语言导致逗号undefined
@@ -24,6 +24,7 @@ var FundData = function(){
                     {title:"投资类型",data:"fundType"},
                     {title:"管理费(%)",data:"mFee"},
                     {title:"托管费(%)",data:"cFee"},
+                    {title:"业绩比较基准",data:"benchmark"},
                     {title:"投资风格",data:"investType"},
                     {title:"基金类型",data:"type"},
                     {title:"存续状态",data:"status",render:function(data){

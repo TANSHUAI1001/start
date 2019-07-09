@@ -6,14 +6,14 @@ var ManagementResource = function(){
                   url:"/sys/resource",
                   data:fix_data_format
                 },
-                'autoWidth':false,
+                autoWidth: false,
                 columns: [
                     {title:"序号",render:function(data,type,row,meta){
 //                      console.log(data,type,row,meta)
                       return meta.row+1;
                     }},
-                    {title:"名称",data:"name"},
-                    {title:"描述",data:"description"},
+                    {title:"名称",data:"value"},
+                    {title:"中文名称",data:"name"},
                     {title:"类型",data:"type"},
                     {title:"级别",data:"level"},
                     {title:"父节点",data:"parent"},
@@ -27,7 +27,12 @@ var ManagementResource = function(){
                         return "已删除";
                       }
                     }},
-                ]
+                ],
+//                ordering: false,
+                columnDefs:[
+                  { "orderable": false, "targets": [0,1,2,7] }
+                ],
+                 order: [[ 4, 'asc' ], [ 6, 'asc' ]] // 动态不能用负数
             });
   }
 

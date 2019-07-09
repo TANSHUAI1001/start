@@ -8,6 +8,7 @@ import java.util.List;
 
 public class BaseVO {
 
+    @Deprecated
     public static Object convert(Object dest,Object orig){
         try {
             BeanUtils.copyProperties(dest,orig);
@@ -16,6 +17,8 @@ public class BaseVO {
         }
         return dest;
     }
+
+    @Deprecated
     public static <T> List<T> convertList(List orig,Class destClz){
         List<T> dest = new ArrayList<>();
         for (Object item:orig) {

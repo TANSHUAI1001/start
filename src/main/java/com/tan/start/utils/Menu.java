@@ -9,8 +9,8 @@ import java.util.List;
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = -903880838815229102L;
+    private String value;
     private String name;
-    private String description;
     private String level;
     private String parent;
     private String classes;
@@ -21,12 +21,20 @@ public class Menu implements Serializable {
     }
 
     public Menu(SysResource item) {
+        this.value = item.getValue();
         this.name = item.getName();
-        this.description = item.getDescription();
         this.level = item.getLevel();
         this.classes = item.getClasses();
         this.priority = item.getPriority();
         this.sub = new ArrayList<>();
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getName() {
@@ -35,14 +43,6 @@ public class Menu implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getLevel() {
@@ -88,8 +88,8 @@ public class Menu implements Serializable {
     @Override
     public String toString() {
         return "Menu{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "value='" + value + '\'' +
+                ", name='" + name + '\'' +
                 ", level='" + level + '\'' +
                 ", parent='" + parent + '\'' +
                 ", classes='" + classes + '\'' +

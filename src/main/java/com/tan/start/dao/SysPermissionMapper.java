@@ -93,4 +93,6 @@ public interface SysPermissionMapper {
      * @mbg.generated Wed Apr 10 15:27:59 CST 2019
      */
     int updateByPrimaryKey(SysPermission record);
+
+    List<SysPermission> selectPermissionByRoleId(@Param("example")SysPermissionExample permissionExample, @Param("roleId")Integer roleId);
 }

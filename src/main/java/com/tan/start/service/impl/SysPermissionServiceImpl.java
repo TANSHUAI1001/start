@@ -24,15 +24,9 @@ public class SysPermissionServiceImpl implements SysPermissionService{
 
     @Override
     public List<String> findPermissionsByRoleId(Integer roleId) {
-        SysRolePermissionExample example = new SysRolePermissionExample();
-        example.createCriteria().andRoleIdEqualTo(roleId);
-        List<SysRolePermission> sysRolePermissions =  sysRolePermissionMapper.selectByExample(example);
-
-        List<Integer> permissionIds = sysRolePermissions.stream().map(SysRolePermission::getPermissionId).collect(Collectors.toList());
-
         SysPermissionExample permissionExample = new SysPermissionExample();
-        permissionExample.createCriteria().andIdIn(permissionIds);
-        List<SysPermission> permissions = sysPermissionMapper.selectByExample(permissionExample);
+        permissionExample.createCriteria().andStateEqualTo(1);
+        List<SysPermission> permissions = sysPermissionMapper.selectPermissionByRoleId(permissionExample,roleId);
         return permissions.stream().map(SysPermission::getValue).collect(Collectors.toList());
     }
 

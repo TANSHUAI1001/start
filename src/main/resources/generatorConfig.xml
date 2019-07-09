@@ -65,7 +65,7 @@
 <!--	<table schema="shop" tableName="sys_organization"></table>-->
 <!--	<table schema="shop" tableName="sys_permission"></table>-->
 <!--	<table schema="shop" tableName="sys_permission_group" />-->
-	<table schema="shop" tableName="sys_permission_resource" />
+<!--	<table schema="shop" tableName="sys_permission_resource" />-->
 <!--	<table schema="shop" tableName="sys_resource" />-->
 <!--	<table schema="shop" tableName="sys_role_resource" />-->
 <!--	<table schema="shop" tableName="sys_role"></table>-->

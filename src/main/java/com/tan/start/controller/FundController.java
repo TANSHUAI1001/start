@@ -19,7 +19,7 @@ public class FundController {
     private FundDataService fundService;
 
     @RequestMapping("/api/fund")
-    public ResponseResult getResource(PageParam pageParam){
+    public ResponseResult getFund(PageParam pageParam){
         PageHelper.offsetPage(pageParam.getStart(),pageParam.getLength());
         List<FundData> fundDataList = fundService.queryAll();
         long total = ((Page) fundDataList).getTotal();

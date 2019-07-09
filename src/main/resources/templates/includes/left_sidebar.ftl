@@ -24,21 +24,21 @@
             <#-- 前端只支持二级级菜单动态生成 -->
     <#list menus as menu>
             <#if menu.sub?size gt 0 >
-                <li class="treeview <#if active?split('/')[1] == menu.name?split('/')[1]>active</#if>" >
+                <li class="treeview <#if active?split('/')[1] == menu.value?split('/')[1]>active</#if>" >
                     <a href="#">
-                        <i class="fa ${menu.classes}"></i> <span>${menu.description}</span>
+                        <i class="fa ${menu.classes}"></i> <span>${menu.name}</span>
                         <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                     </a>
                     <ul class="treeview-menu">
                         <#list menu.sub as item>
-                        <li class="<#if active == item.name >active</#if>" ><a href="${item.name}"><i class="fa ${item.classes}"></i>${item.description}</a></li>
+                        <li class="<#if active == item.value >active</#if>" ><a href="${item.value}"><i class="fa ${item.classes}"></i>${item.name}</a></li>
                         </#list>
                     </ul>
                 </li>
             <#else>
-                <li class="<#if active == menu.name>active</#if>" ><a href="${menu.name}"><i class="fa ${menu.classes}"></i> <span>${menu.description}</span></a></li>
+                <li class="<#if active == menu.value>active</#if>" ><a href="${menu.value}"><i class="fa ${menu.classes}"></i> <span>${menu.name}</span></a></li>
             </#if>
     </#list>
 <#--            <li class="<#if active == '/dashboard'>active</#if>" ><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>-->
