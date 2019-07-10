@@ -15,7 +15,7 @@
                 <!--                </div>-->
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example" class="table table-bordered table-striped">
+                    <table id="example" class="table table-bordered table-striped display nowrap" style="width:100%">
 
                     </table>
                 </div>
@@ -24,6 +24,13 @@
     </div>
 </section>
 </@BasicLayout>
+<style>
+    div.dataTables_wrapper {
+        min-width: 980px;
+        max-width:1180px;
+        margin: 0 auto;
+    }
+</style>
 <script src="/assets/fund_data.js"></script>
 <script>
     $(function(){

@@ -73,6 +73,6 @@
 <!--	<table schema="shop" tableName="sys_user"/>-->
 <!--	<table schema="shop" tableName="sys_user_permission"></table>-->
 <!--	<table schema="shop" tableName="sys_user_role"></table>-->
-<!--      <table schema="shop" tableName="fund_data" />-->
+      <table schema="shop" tableName="fund_data" />
   </context>
 </generatorConfiguration>
