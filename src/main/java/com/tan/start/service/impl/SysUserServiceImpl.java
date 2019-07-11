@@ -35,7 +35,7 @@ public class SysUserServiceImpl implements SysUserService{
 
     @Override
     public List<SysUserDTO> queryAll() {
-        example.setOrderByClause("id asc,state desc");
+        example.setOrderByClause("sys_user.id asc,sys_user.state desc");
         List<SysUserDTO> users = sysUserMapper.selectUserInfoByExample(example);
         example.clear();
         return users;
