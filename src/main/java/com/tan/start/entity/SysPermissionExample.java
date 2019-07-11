@@ -177,6 +177,7 @@ public class SysPermissionExample {
             if (condition == null) {
                 throw new RuntimeException("Value for condition cannot be null");
             }
+            condition = "sys_permission."+condition;
             criteria.add(new Criterion(condition));
         }
 
@@ -184,6 +185,7 @@ public class SysPermissionExample {
             if (value == null) {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
+            condition = "sys_permission."+condition;
             criteria.add(new Criterion(condition, value));
         }
 
@@ -191,6 +193,7 @@ public class SysPermissionExample {
             if (value1 == null || value2 == null) {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
+            condition = "sys_permission."+condition;
             criteria.add(new Criterion(condition, value1, value2));
         }
 

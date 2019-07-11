@@ -10,6 +10,9 @@ public class SysUserDTO extends SysUser {
     private String email;
     private String roleName;
 
+    public SysUserDTO() {
+    }
+
     @Override
     public String getEmail() {
         return email;
