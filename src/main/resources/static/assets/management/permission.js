@@ -15,15 +15,6 @@ var ManagementPermission = function(){
                 {title:"值",data:"value"},
                 {title:"描述",data:"description"},
                 {title:"类型",data:"type"},
-                {title:"状态",data:"state",render:function(data,type,row,meta){
-                  if(data == "1"){
-                    return "正常";
-                  }else if(data == "-1"){
-                    return "锁定";
-                  }else{
-                    return "已删除";
-                  }
-                }},
             ]
         });
   }

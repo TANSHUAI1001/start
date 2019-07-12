@@ -60,19 +60,21 @@
     <javaClientGenerator targetPackage="com.tan.start.dao" targetProject="src/main/java" type="XMLMAPPER">
     	<property name="enableSubPackages" value="true" /> 
     </javaClientGenerator>
-<!--      <table schema="shop" tableName="activity" alias="activity"/>-->
-<!--      <table schema="shop" tableName="success_record" alias="success_record"/>-->
-<!--      <table schema="shop" tableName="sys_organization" alias="sys_organization"/>-->
-<!--      <table schema="shop" tableName="sys_permission" alias="sys_permission" />-->
-<!--      <table schema="shop" tableName="sys_permission_group" alias="sys_permission_group"/>-->
+      <table schema="shop" tableName="activity" alias="activity"/>
+      <table schema="shop" tableName="success_record" alias="success_record"/>
+      <table schema="shop" tableName="sys_organization" alias="sys_organization"/>
+      <table schema="shop" tableName="sys_permission" alias="sys_permission" />
+      <table schema="shop" tableName="sys_permission_group" alias="sys_permission_group"/>
+      <table schema="shop" tableName="sys_resource" alias="sys_resource"/>
+      <table schema="shop" tableName="sys_role" alias="sys_role" />
+      <table schema="shop" tableName="sys_user" alias="sys_user"/>
+      <table schema="shop" tableName="fund_data" alias="fund_data"/>
+
+<!--  中间表不需要生成  -->
 <!--      <table schema="shop" tableName="sys_permission_resource" alias="sys_permission_resource" />-->
-<!--      <table schema="shop" tableName="sys_resource" alias="sys_resource"/>-->
 <!--      <table schema="shop" tableName="sys_role_resource" alias="sys_role_resource"/>-->
-<!--      <table schema="shop" tableName="sys_role" alias="sys_role" />-->
 <!--      <table schema="shop" tableName="sys_role_permission" alias="sys_role_permission" />-->
-<!--      <table schema="shop" tableName="sys_user" alias="sys_user"/>-->
 <!--      <table schema="shop" tableName="sys_user_permission" alias="user_permission"/>-->
 <!--      <table schema="shop" tableName="sys_user_role" alias="sys_user_role"/>-->
-<!--      <table schema="shop" tableName="fund_data" alias="fund_data"/>-->
   </context>
 </generatorConfiguration>

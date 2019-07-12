@@ -1,19 +1,19 @@
 package com.tan.start.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.tan.start.constants.PermissionConstant;
+import com.tan.start.dto.RolePermissionDTO;
 import com.tan.start.dto.SysUserDTO;
 import com.tan.start.entity.SysPermission;
 import com.tan.start.entity.SysResource;
 import com.tan.start.entity.SysRole;
+import com.tan.start.query.Query;
+import com.tan.start.query.RoleQuery;
 import com.tan.start.service.SysPermissionService;
 import com.tan.start.service.SysResourceService;
 import com.tan.start.service.SysRoleService;
 import com.tan.start.service.SysUserService;
-import com.tan.start.utils.ResponseResult;
-import com.tan.start.utils.datatable.PageParam;
+import com.tan.start.utils.ResponseContent;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,52 +40,41 @@ public class SysController {
 
     @RequestMapping("/user")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_USER)
-    public ResponseResult getUser(PageParam pageParam) {
-        PageHelper.offsetPage(pageParam.getStart(), pageParam.getLength());
+    public ResponseContent getUser(Query query) {
+        PageHelper.offsetPage(query.getStart(), query.getLength());
         List<SysUserDTO> sysUsers = sysUserService.queryAll();
-        return ResponseResult.ok().
-                putBaseAttr(pageParam).
-                putAttr(ResponseResult.DATA, sysUsers).
-                putAttr(ResponseResult.RECORDS_TOTAL, ((Page) sysUsers).getTotal()).
-                putAttr(ResponseResult.RECORDS_FILTERED, ((Page) sysUsers).getTotal());
+        return ResponseContent.ok(sysUsers).putQuery(query);
     }
 
     @RequestMapping("/resource")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE)
-    public ResponseResult getResource(PageParam pageParam) {
-        PageHelper.offsetPage(pageParam.getStart(), pageParam.getLength());
+    public ResponseContent getResource(Query query) {
+        PageHelper.offsetPage(query.getStart(), query.getLength());
         List<SysResource> resources = sysResourceService.queryAll();
-        long total = ((Page) resources).getTotal();
-        return ResponseResult.ok().
-                putBaseAttr(pageParam).
-                putAttr(ResponseResult.DATA, resources).
-                putAttr(ResponseResult.RECORDS_TOTAL, total).
-                putAttr(ResponseResult.RECORDS_FILTERED, total);
+        return ResponseContent.ok(resources).putQuery(query);
     }
 
     @RequestMapping("/role")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_ROLE)
-    public ResponseResult getRole(PageParam pageParam) {
-        PageHelper.offsetPage(pageParam.getStart(), pageParam.getLength());
-        List<SysRole> roles = sysRoleService.queryAll();
-        long total = ((Page) roles).getTotal();
-        return ResponseResult.ok().
-                putBaseAttr(pageParam).
-                putAttr(ResponseResult.DATA, roles).
-                putAttr(ResponseResult.RECORDS_TOTAL, total).
-                putAttr(ResponseResult.RECORDS_FILTERED, total);
+    public ResponseContent getRole(RoleQuery roleQuery) {
+        PageHelper.offsetPage(roleQuery.getStart(), roleQuery.getLength());
+        List<SysRole> roles = sysRoleService.queryAll(roleQuery);
+        return ResponseContent.ok(roles).putQuery(roleQuery);
+    }
+
+    @RequestMapping("/rolePermission")
+    @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_ROLE)
+    public ResponseContent getRolePermission(RoleQuery roleQuery,Integer roleId) {
+        PageHelper.offsetPage(roleQuery.getStart(), roleQuery.getLength());
+        List<RolePermissionDTO> permissions = sysPermissionService.findAllPermissionsByRoleId(roleId);
+        return ResponseContent.ok(permissions).putQuery(roleQuery);
     }
 
     @RequestMapping("/permission")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_PERMISSION)
-    public ResponseResult getPermission(PageParam pageParam) {
-        PageHelper.offsetPage(pageParam.getStart(), pageParam.getLength());
+    public ResponseContent getPermission(Query query) {
+        PageHelper.offsetPage(query.getStart(), query.getLength());
         List<SysPermission> permissions = sysPermissionService.queryAll();
-        long total = ((Page) permissions).getTotal();
-        return ResponseResult.ok().
-                putBaseAttr(pageParam).
-                putAttr(ResponseResult.DATA, permissions).
-                putAttr(ResponseResult.RECORDS_TOTAL, total).
-                putAttr(ResponseResult.RECORDS_FILTERED, total);
+        return ResponseContent.ok(permissions).putQuery(query);
     }
 }

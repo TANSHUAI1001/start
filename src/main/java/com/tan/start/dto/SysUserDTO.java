@@ -7,20 +7,15 @@ import com.tan.start.utils.RSAUtils;
 @JsonIgnoreProperties({"password","salt","singleRole"})
 public class SysUserDTO extends SysUser {
     private static final long serialVersionUID = -4896498428027988338L;
-    private String email;
     private String roleName;
 
     public SysUserDTO() {
     }
 
-    @Override
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public void setEmail(String email){
-        this.email = RSAUtils.decrypt(email);
+        super.setEmail(RSAUtils.decrypt(email));
     }
 
     public String getRoleName() {

@@ -1,10 +1,18 @@
 package com.tan.start.utils;
 
-import com.tan.start.utils.datatable.PageParam;
+import com.tan.start.query.Query;
 
-import java.util.HashMap;
+import java.util.*;
 
-public class ResponseResult extends HashMap<String, Object> {
+/**
+ * @see org.springframework.http.ResponseEntity
+ * @see com.github.pagehelper.PageInfo
+ * @see ResponseContent
+ */
+@Deprecated
+public class ResponseResult extends TreeMap<String, Object> {
+    // 普通对象按顺序序列化
+    // 有序的TreeMap，map需要指定顺序
 
     private static final long serialVersionUID = -8713837118340960775L;
 
@@ -15,12 +23,13 @@ public class ResponseResult extends HashMap<String, Object> {
     // 异常 失败
     private static final Integer FAIL = 0;
 
+    public static final String SUCCESS_MSG = "操作成功!";
+    public static final String FAIL_MSG = "操作失败!";
+
     public static final String CODE = "code";
     public static final String MSG = "msg";
     public static final String DATA = "data";
     public static final String ERROR = "error";
-    public static final String SUCCESS_MSG = "操作成功!";
-    public static final String FAIL_MSG = "操作失败!";
 
     public static final String DRAW = "draw";
     public static final String START = "start";
@@ -28,16 +37,37 @@ public class ResponseResult extends HashMap<String, Object> {
     public static final String RECORDS_TOTAL = "recordsTotal";
     public static final String RECORDS_FILTERED = "recordsFiltered";
 
+    private static HashMap<String,Integer> priority = new HashMap<>();
+    static {
+        priority.put(CODE,10);
+        priority.put(MSG,20);
+        priority.put(ERROR,21);
+        priority.put(DRAW,30);
+        priority.put(START,40);
+        priority.put(LENGTH,50);
+        priority.put(RECORDS_FILTERED,60);
+        priority.put(RECORDS_TOTAL,70);
+        priority.put(DATA,80);
+    }
 
     public ResponseResult() {
-        put(CODE, SUCCESS);
-        put(MSG, SUCCESS_MSG);
+        super((o1, o2) -> {
+            if(priority.containsKey(o1) && priority.containsKey(o2)){
+                return priority.get(o1) - priority.get(o2);
+            }else if(priority.containsKey(o1) && !priority.containsKey(o2)){
+                return -1;
+            }else if(!priority.containsKey(o1) && priority.containsKey(o2)){
+                return 1;
+            }
+            return o1.compareTo(o2);
+        });
+
     }
 
     public static ResponseResult error(Object msg) {
         ResponseResult responseResult = new ResponseResult();
         responseResult.put(CODE, FAIL);
-//        responseResult.put(MSG, msg);
+        responseResult.put(MSG, msg);
         responseResult.put(ERROR,msg);
         return responseResult;
     }
@@ -57,7 +87,10 @@ public class ResponseResult extends HashMap<String, Object> {
     }
 
     public static ResponseResult ok() {
-        return new ResponseResult();
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.put(CODE, SUCCESS);
+        responseResult.put(MSG, SUCCESS_MSG);
+        return responseResult;
     }
 
     public static ResponseResult error() {
@@ -69,10 +102,24 @@ public class ResponseResult extends HashMap<String, Object> {
         return this;
     }
 
-    public ResponseResult putBaseAttr(PageParam pageParam) {
-        super.put(DRAW, pageParam.getDraw());
-        super.put(START, pageParam.getStart());
-        super.put(LENGTH, pageParam.getLength());
+    public ResponseResult putDataAttr(Object data) {
+        super.put(DATA, data);
+        return this;
+    }
+
+    public ResponseResult putBaseAttr(Query query) {
+        super.put(DRAW, query.getDraw());
+        super.put(START, query.getStart());
+        super.put(LENGTH, query.getLength());
+        return this;
+    }
+
+    public ResponseResult putBaseAttr(Query query,long total) {
+        super.put(DRAW, query.getDraw());
+        super.put(START, query.getStart());
+        super.put(LENGTH, query.getLength());
+        super.put(RECORDS_TOTAL, total);
+        super.put(RECORDS_FILTERED, total);
         return this;
     }
 }

@@ -1,11 +1,22 @@
 var ManagementRole = function(){
+  var table;
   var load = function(){
-          $('#example').DataTable({
+          table = $('#example').DataTable({
             serverSide:true,
             ajax:{
               url:"/sys/role",
-              data:fix_data_format
+              data:function(d){
+              return{
+                draw: d.draw,
+                start: d.start,
+                length: d.length,
+                name: $("#name-search").val(),
+                state: $("#state-search").val()
+               }
+              }
+
             },
+            dom: "frtlip",
             searching: false,
             autoWidth: false,
             columns: [
@@ -23,12 +34,26 @@ var ManagementRole = function(){
                     return "已删除";
                   }
                 }},
+                {title: "权限",render:function(data,type,row,meta){
+                  return '<a href="#'+row.name+'" onclick="ManagementRole.getPermission('+row.id+')">查看</a>';
+                }}
+
             ]
         });
   }
 
+  var search = function(){
+     table.draw();
+  }
+
+  var getPermission = function(id){
+   console.log(id);
+  }
+
   return {
-    load:load
+    load:load,
+    search:search,
+    getPermission:getPermission
   }
 
 }()

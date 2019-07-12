@@ -1,4 +1,4 @@
-package com.tan.start.utils.datatable;
+package com.tan.start.query.datatable;
 
 public class Order{
     private Integer column;

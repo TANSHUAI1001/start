@@ -1,26 +1,24 @@
 package com.tan.start.controller;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tan.start.entity.Activity;
 import com.tan.start.service.ActivityService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+@RestController
 @RequestMapping(value="/activity")
 public class ActivityController {
     @Resource
@@ -46,13 +44,12 @@ public class ActivityController {
     // ResponseEntity不仅可以返回json结果，还可以定义返回的HttpHeaders和HttpStatus
     @RequestMapping(value="/page")
     @ResponseBody
-    @RequiresPermissions(value = "queryall")
-    public Object page() {
-        PageHelper.startPage(2,3);
+    public ResponseEntity page() {
+        PageHelper.startPage(1,3);
         List<Activity> list = activityService.queryActivities();
         PageInfo<Activity> info = new PageInfo<Activity>(list);
         logger.info("size: "+info.getSize());
-        return info;
+        return ResponseEntity.ok(info);
 
     }
 }

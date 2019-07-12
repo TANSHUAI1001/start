@@ -1,6 +1,7 @@
 package com.tan.start.controller;
 
 import com.tan.start.system.MessageSender;
+import com.tan.start.utils.ResponseContent;
 import com.tan.start.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,9 @@ public class MessageController {
 
 
     @RequestMapping("/send")
-    public ResponseResult testSend(String title,String content){
+    public ResponseContent testSend(String title, String content){
         messageSender.sendMessage();
-        return ResponseResult.ok();
+        return ResponseContent.ok();
     }
 
 }

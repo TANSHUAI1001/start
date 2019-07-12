@@ -1,5 +1,6 @@
 package com.tan.start.controller;
 
+import com.tan.start.constants.CommonConstant;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,30 +9,30 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/error")
+@RequestMapping(CommonConstant.ERROR)
 public class CustomErrorController {
 
-    @RequestMapping("/401")
+    @RequestMapping(CommonConstant.UNAUTHORIZED)
     public ModelAndView error401(ModelAndView modelAndView){
-        modelAndView.setViewName("/error/401");
+        modelAndView.setViewName(CommonConstant.ERROR.concat(CommonConstant.UNAUTHORIZED));
         return modelAndView;
     }
 
-    @RequestMapping("/403")
+    @RequestMapping(CommonConstant.FORBIDDEN)
     public ModelAndView error403(ModelAndView modelAndView){
-        modelAndView.setViewName("/error/403");
+        modelAndView.setViewName(CommonConstant.ERROR.concat(CommonConstant.FORBIDDEN));
         return modelAndView;
     }
 
-    @RequestMapping("/404")
+    @RequestMapping(CommonConstant.NOT_FOUND)
     public ModelAndView error404(ModelAndView modelAndView){
-        modelAndView.setViewName("/error/404");
+        modelAndView.setViewName(CommonConstant.ERROR.concat(CommonConstant.NOT_FOUND));
         return modelAndView;
     }
 
-    @RequestMapping("/500")
+    @RequestMapping(CommonConstant.INTERNAL_SEVER_ERROR)
     public ModelAndView error500(ModelAndView modelAndView){
-        modelAndView.setViewName("/error/500");
+        modelAndView.setViewName(CommonConstant.ERROR.concat(CommonConstant.INTERNAL_SEVER_ERROR));
         return modelAndView;
     }
 }

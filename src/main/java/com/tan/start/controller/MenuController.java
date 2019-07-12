@@ -52,7 +52,6 @@ public class MenuController {
 
     @RequestMapping(value= MenuConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE)
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE)
-    @RequiresRoles("admin")
     public ModelAndView resource(ModelAndView modelAndView) {
         modelAndView.setViewName(MenuConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE);
         modelAndView.addObject(MenuConstant.MENU_ACTIVE,MenuConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE);

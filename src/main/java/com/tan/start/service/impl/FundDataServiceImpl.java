@@ -19,7 +19,7 @@ public class FundDataServiceImpl implements FundDataService {
 
     @Override
     public List<FundData> queryAll() {
-        example.setOrderByClause("market asc, ts_code asc");
+        example.setOrderByClause("fund_data.market asc, fund_data.ts_code asc");
         return fundDataMapper.selectByExampleWithBLOBs(example);
     }
 }

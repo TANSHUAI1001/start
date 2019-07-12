@@ -2,6 +2,7 @@ package com.tan.start.exception.handler;
 
 
 import com.tan.start.exception.CommonException;
+import com.tan.start.utils.ResponseContent;
 import com.tan.start.utils.ResponseResult;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -20,7 +21,7 @@ public class ExceptionHandlerRestController {
             AuthorizationException.class,
             CommonException.class,
             NullPointerException.class})
-    public ResponseResult handleRestException(Exception ex) {
-        return ResponseResult.error(ex.getMessage());
+    public ResponseContent handleRestException(Exception ex) {
+        return ResponseContent.error(ex.getMessage()).putMsg(ex.getMessage());
     }
 }

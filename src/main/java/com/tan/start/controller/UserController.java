@@ -1,8 +1,9 @@
 package com.tan.start.controller;
 
+import com.tan.start.constants.CommonConstant;
 import com.tan.start.entity.SysUser;
 import com.tan.start.service.SysUserService;
-import com.tan.start.utils.ResponseResult;
+import com.tan.start.utils.ResponseContent;
 import com.tan.start.utils.ShiroUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -26,9 +27,9 @@ public class UserController {
     private SysUserService sysUserService;
 
     @RequestMapping(value = "/resetPassword",method = RequestMethod.POST)
-    public ResponseResult resetPassword(String password,String newPassword){
+    public ResponseContent resetPassword(String password,String newPassword){
         if(StringUtils.isBlank(password) || StringUtils.isBlank(newPassword)){
-            return ResponseResult.error("参数错误！");
+            return ResponseContent.fail(CommonConstant.PARAM_ERROR);
         }
 
         Subject subject = SecurityUtils.getSubject();
@@ -36,7 +37,7 @@ public class UserController {
 
         String md5PasswordWithSalt = DigestUtils.md5DigestAsHex((password+user.getSalt()).getBytes());
         if(!md5PasswordWithSalt.equals(user.getPassword())){
-            return ResponseResult.error("原始密码错误！");
+            return ResponseContent.fail(CommonConstant.ORIGINAL_PASSWORD_ERROR);
         }
         String md5NewPasswordWithSalt = DigestUtils.md5DigestAsHex((newPassword+user.getSalt()).getBytes());
         int rows = sysUserService.updatePasswordById(user.getId(),md5NewPasswordWithSalt);
@@ -44,19 +45,19 @@ public class UserController {
             SysUser userInfo = sysUserService.findById(user.getId());
             ShiroUtils.setUser(userInfo);
         }
-        return ResponseResult.ok();
+        return ResponseContent.ok();
     }
 
     @RequestMapping(value = "/modify",method = RequestMethod.POST)
-    public ResponseResult modifyUserInfo(String email){
+    public ResponseContent modifyUserInfo(String email){
         if(StringUtils.isBlank(email)){
-            return ResponseResult.error("参数错误！");
+            return ResponseContent.fail(CommonConstant.PARAM_ERROR);
         }
 
         Subject subject = SecurityUtils.getSubject();
         SysUser user = (SysUser) subject.getPrincipal();
         if(email.equals(user.getEmail())){
-            return ResponseResult.error("未作修改！");
+            return ResponseContent.fail(CommonConstant.NOT_MODIFY_ERROR);
         }
         SysUser modify = new SysUser();
         modify.setId(user.getId());
@@ -66,12 +67,12 @@ public class UserController {
         if(rows == 1){
             SysUser userInfo = sysUserService.findById(user.getId());
             ShiroUtils.setUser(userInfo);
-            return ResponseResult.ok("更新成功");
+            return ResponseContent.ok().putMsg(CommonConstant.UPDATE_SUCCESS);
         }else if(rows == 0){
-            return ResponseResult.error("更新失败");
+            return ResponseContent.fail(CommonConstant.UPDATE_FAIL);
         }else {
-            logger.warn("modify user update rows : "+rows);
-            return ResponseResult.warn("服务异常");
+            logger.error("modify user update rows : "+rows);
+            return ResponseContent.fail(CommonConstant.SERVER_ERROR);
         }
 
 
