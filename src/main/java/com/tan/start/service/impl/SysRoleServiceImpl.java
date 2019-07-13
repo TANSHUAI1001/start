@@ -71,7 +71,6 @@ public class SysRoleServiceImpl implements SysRoleService{
         int rows = sysRolePermissionMapper.updateByExampleSelective(record,example);
         if(rows > 0){
             template.delete("menu:"+roleId);
-            RedisUtils.clearAuthorizationCache();
             realm.getAuthorizationCache().clear();
         }
         return rows;

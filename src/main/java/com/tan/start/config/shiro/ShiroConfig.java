@@ -46,8 +46,6 @@ public class ShiroConfig {
     @Value("${spring.redis.timeout}")
     private int timeout;
 
-    @Value("${febs.shiro.redisAuthorizationCacheDb}")
-    private int redisAuthorizationCacheDb;
     
     /**
      * shiro 中配置 redis 缓存
@@ -71,7 +69,7 @@ public class ShiroConfig {
 
     private RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setRedisManager(redisManager(redisAuthorizationCacheDb));
+        redisCacheManager.setRedisManager(redisManager());
         redisCacheManager.setValueSerializer(new GenericRedisSerializer());
         return redisCacheManager;
     }
