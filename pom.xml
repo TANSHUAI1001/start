@@ -98,8 +98,9 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.4.0</version>
         </dependency>
-        
-         <!-- shiro-redis -->
+
+
+		<!-- shiro-redis -->
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>

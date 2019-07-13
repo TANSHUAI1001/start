@@ -3,12 +3,13 @@ package com.tan.start.controller;
 import com.github.pagehelper.PageHelper;
 import com.tan.start.constants.PermissionConstant;
 import com.tan.start.dto.RolePermissionDTO;
+import com.tan.start.dto.SysResourceDTO;
 import com.tan.start.dto.SysUserDTO;
 import com.tan.start.entity.SysPermission;
-import com.tan.start.entity.SysResource;
 import com.tan.start.entity.SysRole;
 import com.tan.start.query.Query;
 import com.tan.start.query.RoleQuery;
+import com.tan.start.query.datatable.PageParam;
 import com.tan.start.service.SysPermissionService;
 import com.tan.start.service.SysResourceService;
 import com.tan.start.service.SysRoleService;
@@ -50,7 +51,7 @@ public class SysController {
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE)
     public ResponseContent getResource(Query query) {
         PageHelper.offsetPage(query.getStart(), query.getLength());
-        List<SysResource> resources = sysResourceService.queryAll();
+        List<SysResourceDTO> resources = sysResourceService.queryAll();
         return ResponseContent.ok(resources).putQuery(query);
     }
 
@@ -64,10 +65,20 @@ public class SysController {
 
     @RequestMapping("/rolePermission")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_ROLE)
-    public ResponseContent getRolePermission(RoleQuery roleQuery,Integer roleId) {
-        PageHelper.offsetPage(roleQuery.getStart(), roleQuery.getLength());
+    public ResponseContent getRolePermission(PageParam pageParam, Integer roleId) {
+        PageHelper.offsetPage(pageParam.getStart(), pageParam.getLength());
         List<RolePermissionDTO> permissions = sysPermissionService.findAllPermissionsByRoleId(roleId);
-        return ResponseContent.ok(permissions).putQuery(roleQuery);
+        return ResponseContent.ok(permissions).putQuery(pageParam);
+    }
+
+    @RequestMapping("/updateRolePermission")
+    @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_ROLE)
+    public ResponseContent updateRolePermission(Integer roleId,Integer permissionId,Integer state) {
+        int rows = sysRoleService.updateRolePermissionState(roleId,permissionId,state);
+        if(rows <= 0){
+            return ResponseContent.fail();
+        }
+        return ResponseContent.ok();
     }
 
     @RequestMapping("/permission")

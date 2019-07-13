@@ -12,4 +12,6 @@ public interface SysRoleService {
     public SysRole findBySingleRole(Integer singleRoleId);
 
     List<SysRole> queryAll(RoleQuery roleQuery);
+
+    int updateRolePermissionState(Integer roleId, Integer permissionId, Integer state);
 }

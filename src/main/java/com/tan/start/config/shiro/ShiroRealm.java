@@ -31,7 +31,6 @@ import com.tan.start.service.SysUserService;
 import org.springframework.util.DigestUtils;
 
 //@Component("shiroRealm")
-//TODO 自定义实现
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired

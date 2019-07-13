@@ -45,6 +45,9 @@ public class ShiroConfig {
 
     @Value("${spring.redis.timeout}")
     private int timeout;
+
+    @Value("${febs.shiro.redisAuthorizationCacheDb}")
+    private int redisAuthorizationCacheDb;
     
     /**
      * shiro 中配置 redis 缓存
@@ -52,20 +55,24 @@ public class ShiroConfig {
      * @return RedisManager
      */
     private RedisManager redisManager() {
+        return redisManager(0);
+    }
+
+    private RedisManager redisManager(int db) {
         RedisManager redisManager = new RedisManager();
-        // 缓存时间，单位为秒
-        //redisManager.setExpire(febsProperties.getShiro().getExpireIn()); // removed from shiro-redis v3.1.0 api
         redisManager.setHost(host);
         redisManager.setPort(port);
         if (StringUtils.isNotBlank(password))
             redisManager.setPassword(password);
         redisManager.setTimeout(timeout);
+        redisManager.setDatabase(db);
         return redisManager;
     }
 
     private RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setRedisManager(redisManager());
+        redisCacheManager.setRedisManager(redisManager(redisAuthorizationCacheDb));
+        redisCacheManager.setValueSerializer(new GenericRedisSerializer());
         return redisCacheManager;
     }
 

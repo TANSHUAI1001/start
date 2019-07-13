@@ -14,9 +14,9 @@ var ManagementResource = function(){
                     }},
                     {title:"名称",data:"value"},
                     {title:"中文名称",data:"name"},
-                    {title:"类型",data:"type"},
+                    {title:"类型",data:"typeName"},
                     {title:"级别",data:"level"},
-                    {title:"父节点",data:"parent"},
+                    {title:"上级节点",data:"parentName"},
                     {title:"优先级",data:"priority"},
                     {title:"状态",data:"state",render:function(data,type,row,meta){
                       if(data == "1"){

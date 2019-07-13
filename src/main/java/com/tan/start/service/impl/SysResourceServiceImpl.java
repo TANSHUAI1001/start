@@ -1,6 +1,7 @@
 package com.tan.start.service.impl;
 
 import com.tan.start.dao.SysResourceMapper;
+import com.tan.start.dto.SysResourceDTO;
 import com.tan.start.entity.*;
 import com.tan.start.service.SysResourceService;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,10 @@ public class SysResourceServiceImpl implements SysResourceService {
     SysResourceExample example = new SysResourceExample();
 
     @Override
-    public List<SysResource> getMenu() {
+    public List<SysResourceDTO> getMenu() {
         example.createCriteria().andTypeEqualTo("menu").andStateEqualTo(1);
         example.setOrderByClause("sys_resource.level asc,sys_resource.priority asc");
-        List<SysResource> menus = sysResourcesMapper.selectByExample(example);
+        List<SysResourceDTO> menus = sysResourcesMapper.selectByExample(example);
         example.clear();
         return menus;
     }
@@ -35,10 +36,10 @@ public class SysResourceServiceImpl implements SysResourceService {
     }
 
     @Override
-    public List<SysResource> queryAll() {
+    public List<SysResourceDTO> queryAll() {
         example.createCriteria().andStateEqualTo(1);
         example.setOrderByClause("sys_resource.level asc,sys_resource.priority asc");
-        List<SysResource> resources = sysResourcesMapper.selectByExample(example);
+        List<SysResourceDTO> resources = sysResourcesMapper.selectByExample(example);
         example.clear();
         return resources;
     }

@@ -7,6 +7,7 @@ public class MenuConstant {
     public static final String SYSTEM_MENU_DASHBOARD = "/dashboard";
     public static final String SYSTEM_MENU_PROFILE = "/profile";
 
+    public static final String SYSTEM_PAGE_BASIC_BLANK = "/basic_blank";
     public static final String SYSTEM_MENU_MANAGEMENT = "/management";
     public static final String SYSTEM_MENU_MANAGEMENT_USER = "/management/user";
     public static final String SYSTEM_MENU_MANAGEMENT_RESOURCE = "/management/resource";

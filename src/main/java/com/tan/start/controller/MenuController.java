@@ -42,6 +42,14 @@ public class MenuController {
         return modelAndView;
     }
 
+    @RequestMapping(value= MenuConstant.SYSTEM_MENU_MANAGEMENT)
+    @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT)
+    public ModelAndView management(ModelAndView modelAndView) {
+        modelAndView.setViewName(MenuConstant.SYSTEM_PAGE_BASIC_BLANK);
+        modelAndView.addObject(MenuConstant.MENU_ACTIVE,MenuConstant.SYSTEM_MENU_MANAGEMENT);
+        return modelAndView;
+    }
+
     @RequestMapping(value= MenuConstant.SYSTEM_MENU_MANAGEMENT_USER)
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_USER)
     public ModelAndView user(ModelAndView modelAndView) {

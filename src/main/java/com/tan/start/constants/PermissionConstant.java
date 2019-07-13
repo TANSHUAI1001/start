@@ -1,12 +1,13 @@
 package com.tan.start.constants;
 
 public class PermissionConstant {
-    public static final String SYSTEM_MENU_FUND = "system:menu:fund";
-    public static final String SYSTEM_MENU_DASHBOARD = "system:menu:dashboard";
-    public static final String SYSTEM_MENU_PROFILE = "system:menu:profile";
-    public static final String SYSTEM_MENU_MANAGEMENT = "system:menu:management";
-    public static final String SYSTEM_MENU_MANAGEMENT_USER = "system:menu:management:user";
-    public static final String SYSTEM_MENU_MANAGEMENT_RESOURCE = "system:menu:management:resource";
-    public static final String SYSTEM_MENU_MANAGEMENT_ROLE = "system:menu:management:role";
-    public static final String SYSTEM_MENU_MANAGEMENT_PERMISSION = "system:menu:management:permission";
+    // shiro 规则：“资源标识符：操作：对象实例ID”
+    public static final String SYSTEM_MENU_FUND = "menu_fund";
+    public static final String SYSTEM_MENU_DASHBOARD = "menu_dashboard";
+    public static final String SYSTEM_MENU_PROFILE = "menu_profile";
+    public static final String SYSTEM_MENU_MANAGEMENT = "menu_management";
+    public static final String SYSTEM_MENU_MANAGEMENT_USER = "menu_management_user";
+    public static final String SYSTEM_MENU_MANAGEMENT_RESOURCE = "menu_management_resource";
+    public static final String SYSTEM_MENU_MANAGEMENT_ROLE = "menu_management_role";
+    public static final String SYSTEM_MENU_MANAGEMENT_PERMISSION = "menu_management_permission";
 }
