@@ -9,5 +9,4 @@ public class PermissionConstant {
     public static final String SYSTEM_MENU_MANAGEMENT_USER = "menu_management_user";
     public static final String SYSTEM_MENU_MANAGEMENT_RESOURCE = "menu_management_resource";
     public static final String SYSTEM_MENU_MANAGEMENT_ROLE = "menu_management_role";
-    public static final String SYSTEM_MENU_MANAGEMENT_PERMISSION = "menu_management_permission";
 }

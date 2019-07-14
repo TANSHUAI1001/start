@@ -73,12 +73,4 @@ public class MenuController {
         modelAndView.addObject(MenuConstant.MENU_ACTIVE,MenuConstant.SYSTEM_MENU_MANAGEMENT_ROLE);
         return modelAndView;
     }
-
-    @RequestMapping(value= MenuConstant.SYSTEM_MENU_MANAGEMENT_PERMISSION)
-    @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_PERMISSION)
-    public ModelAndView permission(ModelAndView modelAndView) {
-        modelAndView.setViewName(MenuConstant.SYSTEM_MENU_MANAGEMENT_PERMISSION);
-        modelAndView.addObject(MenuConstant.MENU_ACTIVE,MenuConstant.SYSTEM_MENU_MANAGEMENT_PERMISSION);
-        return modelAndView;
-    }
 }

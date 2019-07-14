@@ -34,8 +34,8 @@ var ManagementRole = function(){
                     return "已删除";
                   }
                 }},
-                {title: "权限",render:function(data,type,row,meta){
-                  return '<a href="#'+row.name+'" onclick="ManagementRole.getPermission('+row.id+')">查看</a>';
+                {title: "资源权限",render:function(data,type,row,meta){
+                  return '<a href="#'+row.name+'" onclick="ManagementRole.getResource('+row.id+')">查看</a>';
                 }}
 
             ]
@@ -46,7 +46,7 @@ var ManagementRole = function(){
      table.draw();
   }
 
-  var getPermission = function(id){
+  var getResource = function(id){
     $('#rolePermissionModal').modal({
       keyboard: false
     });
@@ -57,7 +57,7 @@ var ManagementRole = function(){
     ManagementRole.rolePermissionTable = $('#rolePermissionTable').DataTable({
     serverSide:true,
     ajax:{
-      url:"/sys/rolePermission",
+      url:"/sys/roleResource",
       data:function(d){
         d.roleId = id;
         return fix_data_format(d);
@@ -72,14 +72,15 @@ var ManagementRole = function(){
           return meta.row+1;
          }},
         {title:"值",data:"value"},
-        {title:"描述",data:"description"},
+        {title:"描述",data:"name"},
+        {title:"权限",data:"permission"},
         {title:"类型",data:"type"},
-        {title:"是否拥有",data:"hasPermission",render: function(data,type,row,meta){
-          if(data == 1) return "<span class='label label-success'>是</span>";
+        {title:"是否可用",data:"sysRoleResource.available",render: function(data,type,row,meta){
+          if(data) return "<span class='label label-success'>是</span>";
           return "<span class='label label-danger'>否</span>";
         }},
         {title:"操作",render: function(data,type,row,meta){
-          if(row.hasPermission == 1) return "<div class='label label-danger permission-remove' "+
+          if(row.sysRoleResource.available) return "<div class='label label-danger permission-remove' "+
           "role='button' onclick='ManagementRole.removePermission("+row.id+","+id+")' >" +
           "<i class='fa fa-fw fa-minus-square'></i>移除</div>";
           return "<div class='label label-success permission-add' "+
@@ -91,26 +92,20 @@ var ManagementRole = function(){
   }
 
 
-  var removePermission = function(pid,rid){
-    console.log(pid,rid);
-    console.log("remove");
-    $.post("/sys/updateRolePermission",{roleId:rid,permissionId:pid,state:0},function(res){
+  var removePermission = function(resId,roleId){
+    $.post("/sys/updateRoleResource",{roleId:roleId,resourceId:resId,state:0},function(res){
       console.log(res);
-    });
-    ManagementRole.rolePermissionTable.draw('page');
+    }).done(ManagementRole.rolePermissionTable.draw('page'));
   }
-  var addPermission = function(pid,rid){
-    console.log(pid,rid);
-    console.log("add");
-    $.post("/sys/updateRolePermission",{roleId:rid,permissionId:pid,state:1},function(res){
+  var addPermission = function(resId,roleId){
+    $.post("/sys/updateRoleResource",{roleId:roleId,resourceId:resId,state:1},function(res){
       console.log(res);
-    });
-    ManagementRole.rolePermissionTable.draw('page');
+    }).done(ManagementRole.rolePermissionTable.draw('page'));
   }
   return {
     load:load,
     search:search,
-    getPermission:getPermission,
+    getResource:getResource,
     removePermission:removePermission,
     addPermission:addPermission
   }

@@ -1,5 +1,6 @@
 package com.tan.start.service;
 
+import com.tan.start.dto.RoleResourceDTO;
 import com.tan.start.dto.SysResourceDTO;
 import com.tan.start.entity.SysResource;
 
@@ -9,7 +10,11 @@ import java.util.List;
 public interface SysResourceService {
     List<SysResourceDTO> getMenu();
 
-    List<SysResource> getMenuByRole(Integer roleId);
+    List<RoleResourceDTO> getMenuByRole(Integer roleId);
 
-    List<SysResourceDTO> queryAll();
+    List<SysResourceDTO> queryAllResource();
+
+    List<String> getPermissionsByRoleId(Integer roleId);
+
+    List<RoleResourceDTO> getAllResourceByRoleId(Integer roleId);
 }

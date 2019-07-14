@@ -2,15 +2,13 @@ package com.tan.start.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.tan.start.constants.PermissionConstant;
-import com.tan.start.dto.RolePermissionDTO;
+import com.tan.start.dto.RoleResourceDTO;
 import com.tan.start.dto.SysResourceDTO;
 import com.tan.start.dto.SysUserDTO;
-import com.tan.start.entity.SysPermission;
 import com.tan.start.entity.SysRole;
 import com.tan.start.query.Query;
 import com.tan.start.query.RoleQuery;
 import com.tan.start.query.datatable.PageParam;
-import com.tan.start.service.SysPermissionService;
 import com.tan.start.service.SysResourceService;
 import com.tan.start.service.SysRoleService;
 import com.tan.start.service.SysUserService;
@@ -35,8 +33,6 @@ public class SysController {
     @Resource
     private SysRoleService sysRoleService;
     @Resource
-    private SysPermissionService sysPermissionService;
-    @Resource
     private SysResourceService sysResourceService;
 
     @RequestMapping("/user")
@@ -51,7 +47,7 @@ public class SysController {
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_RESOURCE)
     public ResponseContent getResource(Query query) {
         PageHelper.offsetPage(query.getStart(), query.getLength());
-        List<SysResourceDTO> resources = sysResourceService.queryAll();
+        List<SysResourceDTO> resources = sysResourceService.queryAllResource();
         return ResponseContent.ok(resources).putQuery(query);
     }
 
@@ -63,29 +59,22 @@ public class SysController {
         return ResponseContent.ok(roles).putQuery(roleQuery);
     }
 
-    @RequestMapping("/rolePermission")
+    @RequestMapping("/roleResource")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_ROLE)
     public ResponseContent getRolePermission(PageParam pageParam, Integer roleId) {
         PageHelper.offsetPage(pageParam.getStart(), pageParam.getLength());
-        List<RolePermissionDTO> permissions = sysPermissionService.findAllPermissionsByRoleId(roleId);
-        return ResponseContent.ok(permissions).putQuery(pageParam);
+        List<RoleResourceDTO> roleResources = sysResourceService.getAllResourceByRoleId(roleId);
+        return ResponseContent.ok(roleResources).putQuery(pageParam);
     }
 
-    @RequestMapping("/updateRolePermission")
+    @RequestMapping("/updateRoleResource")
     @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_ROLE)
-    public ResponseContent updateRolePermission(Integer roleId,Integer permissionId,Integer state) {
-        int rows = sysRoleService.updateRolePermissionState(roleId,permissionId,state);
+    public ResponseContent updateRolePermission(Integer roleId,Long resourceId,Integer state) {
+        int rows = sysRoleService.updateRoleResource(roleId,resourceId,state);
         if(rows <= 0){
             return ResponseContent.fail();
         }
         return ResponseContent.ok();
     }
 
-    @RequestMapping("/permission")
-    @RequiresPermissions(PermissionConstant.SYSTEM_MENU_MANAGEMENT_PERMISSION)
-    public ResponseContent getPermission(Query query) {
-        PageHelper.offsetPage(query.getStart(), query.getLength());
-        List<SysPermission> permissions = sysPermissionService.queryAll();
-        return ResponseContent.ok(permissions).putQuery(query);
-    }
 }

@@ -1,12 +1,11 @@
 package com.tan.start.config.shiro;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import com.tan.start.entity.SysResource;
+import com.tan.start.service.SysResourceService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -20,12 +19,9 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import com.tan.start.entity.SysPermission;
 import com.tan.start.entity.SysRole;
 import com.tan.start.entity.SysUser;
-import com.tan.start.service.SysPermissionService;
 import com.tan.start.service.SysRoleService;
 import com.tan.start.service.SysUserService;
 import org.springframework.util.DigestUtils;
@@ -38,7 +34,7 @@ public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private SysRoleService sysRoleService;
     @Autowired
-    private SysPermissionService sysPermissionService;
+    private SysResourceService sysResourceService;
 
     /**
      * 授权模块，获取用户角色和权限
@@ -62,7 +58,7 @@ public class ShiroRealm extends AuthorizingRealm {
         simpleAuthorizationInfo.setRoles(roleSet);
 
         // 获取用户权限集
-        List<String> permissionList = sysPermissionService.findPermissionsByRoleId(singleRoleId);
+        List<String> permissionList = sysResourceService.getPermissionsByRoleId(singleRoleId);
         Set<String> permissionSet = new HashSet<>(permissionList);
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;

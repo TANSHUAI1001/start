@@ -1,5 +1,7 @@
 package com.tan.start.aspect;
 
+import com.tan.start.dto.RoleResourceDTO;
+import com.tan.start.dto.SysResourceDTO;
 import com.tan.start.entity.SysResource;
 import com.tan.start.entity.SysUser;
 import com.tan.start.service.SysResourceService;
@@ -74,7 +76,7 @@ public class AspectConfig {
         //支持多级菜单生成
         List<Menu>menus = (List<Menu>) template.opsForValue().get("menu:"+user.getSingleRole());
         if(menus == null) {
-            List<SysResource> resources = sysResourcesService.getMenuByRole(user.getSingleRole());
+            List<RoleResourceDTO> resources = sysResourcesService.getMenuByRole(user.getSingleRole());
             menus = GenerateTreeFromList.generateTree(resources);
             template.opsForValue().set("menu:"+user.getSingleRole(), menus);
         }
