@@ -1,9 +1,12 @@
 <#include "/includes/basic_layout.ftl">
-
+<!--<#setting classic_compatible=true>-->
 <@BasicLayout title="主页">
 <section class="content-header">
     <h1>
-        主页
+        主页 ${context.getContextPath()}
     </h1>
+    <#list .data_model?keys as key>
+    <li>${key}</li>
+    </#list>
 </section>
 </@BasicLayout>

@@ -3,7 +3,7 @@ var FundData = function(){
         var table = $('#example').DataTable({
                 serverSide:true,
                 ajax:{
-                  url:"/api/fund",
+                  url:"api/fund",
                   data:fix_data_format
                 },
                 searching: false,

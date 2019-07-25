@@ -3,7 +3,7 @@ var ManagementUser = function(){
           $('#example').DataTable({
             serverSide:true,
             ajax:{
-              url:"/sys/user",
+              url:"sys/user",
               data:fix_data_format
             },
             searching: false,

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2019-04-10 22:38:47
+Date: 2019-07-20 11:32:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,13 +33,37 @@ CREATE TABLE `activity` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1010 DEFAULT CHARSET=utf8 COMMENT='库存';
 
 -- ----------------------------
--- Records of activity
+-- Table structure for fund_data
 -- ----------------------------
-INSERT INTO `activity` VALUES ('1005', '1000元秒杀iPad', '100', '2018-12-31 00:00:00', '2019-01-01 00:00:00', '2018-05-12 16:03:57');
-INSERT INTO `activity` VALUES ('1006', '1000元秒杀iPhone7', '200', '2018-12-31 00:00:00', '2019-01-01 00:00:00', '2018-05-12 16:03:57');
-INSERT INTO `activity` VALUES ('1007', '1000元秒杀红米note', '300', '2018-12-31 00:00:00', '2019-01-01 00:00:00', '2018-05-12 16:03:57');
-INSERT INTO `activity` VALUES ('1008', '1000元秒杀macbook pro', '10', '2018-12-31 00:00:00', '2019-01-01 00:00:00', '2018-05-12 16:03:57');
-INSERT INTO `activity` VALUES ('1009', '1000元秒杀小米5', '400', '2018-12-31 00:00:00', '2019-01-01 00:00:00', '2018-05-12 16:03:57');
+DROP TABLE IF EXISTS `fund_data`;
+CREATE TABLE `fund_data` (
+  `ts_code` varchar(255) NOT NULL COMMENT '基金代码',
+  `name` varchar(255) DEFAULT NULL COMMENT '简称',
+  `management` varchar(255) DEFAULT NULL COMMENT '管理人',
+  `custodian` varchar(255) DEFAULT NULL COMMENT '托管人',
+  `fund_type` varchar(255) DEFAULT NULL COMMENT '投资类型',
+  `found_date` varchar(255) DEFAULT NULL COMMENT '成立日期',
+  `due_date` varchar(255) DEFAULT NULL COMMENT '到期日期',
+  `list_date` varchar(255) DEFAULT NULL COMMENT '上市时间',
+  `issue_date` varchar(255) DEFAULT NULL COMMENT '发行日期',
+  `delist_date` varchar(255) DEFAULT NULL COMMENT '退市日期',
+  `issue_amount` double DEFAULT NULL COMMENT '发行份额(亿)',
+  `m_fee` double DEFAULT NULL COMMENT '管理费',
+  `c_fee` double DEFAULT NULL COMMENT '托管费',
+  `duration_year` double DEFAULT NULL COMMENT '存续期',
+  `p_value` double DEFAULT NULL COMMENT '面值',
+  `min_amount` double DEFAULT NULL COMMENT '起点金额(万元)',
+  `exp_return` varchar(255) DEFAULT NULL COMMENT '预期收益率',
+  `benchmark` text COMMENT '业绩比较基准',
+  `status` varchar(255) DEFAULT NULL COMMENT '存续状态D摘牌 I发行 L已上市',
+  `invest_type` varchar(255) DEFAULT NULL COMMENT '投资风格',
+  `type` varchar(255) DEFAULT NULL COMMENT '基金类型',
+  `trustee` varchar(255) DEFAULT NULL COMMENT '受托人',
+  `purc_startdate` varchar(255) DEFAULT NULL COMMENT '日常申购起始日',
+  `redm_startdate` varchar(255) DEFAULT NULL COMMENT '日常赎回起始日',
+  `market` varchar(255) DEFAULT NULL COMMENT 'E场内O场外',
+  PRIMARY KEY (`ts_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for success_record
@@ -55,13 +79,6 @@ CREATE TABLE `success_record` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秒杀明细表';
 
 -- ----------------------------
--- Records of success_record
--- ----------------------------
-INSERT INTO `success_record` VALUES ('1000', '1234567890', '-1', '2017-01-03 09:26:18');
-INSERT INTO `success_record` VALUES ('1004', '1234567891', '-1', '2017-01-03 10:33:51');
-INSERT INTO `success_record` VALUES ('1004', '1234567892', '-1', '2017-01-03 10:35:10');
-
--- ----------------------------
 -- Table structure for sys_organization
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_organization`;
@@ -75,80 +92,22 @@ CREATE TABLE `sys_organization` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of sys_organization
+-- Table structure for sys_resource
 -- ----------------------------
-
--- ----------------------------
--- Table structure for sys_permission
--- ----------------------------
-DROP TABLE IF EXISTS `sys_permission`;
-CREATE TABLE `sys_permission` (
-  `id` int(11) NOT NULL COMMENT '主键，权限总数较小（int）',
-  `value` varchar(255) DEFAULT NULL COMMENT '权限名称',
-  `groups` int(11) DEFAULT NULL COMMENT '权限组',
-  `description` varchar(255) DEFAULT NULL COMMENT '描述',
-  `type` enum('RESOURCE','SPECIAL','DEFAULT') DEFAULT 'DEFAULT' COMMENT '权限类型，默认DEFAULT，特殊SPECIAL，资源RESOURCE',
-  `state` int(11) DEFAULT '1' COMMENT '状态，默认1正常',
-  PRIMARY KEY (`id`),
-  KEY `fk_sys_permission_groups_id` (`groups`),
-  CONSTRAINT `fk_sys_permission_groups_id` FOREIGN KEY (`groups`) REFERENCES `sys_permission_groups` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_permission
--- ----------------------------
-INSERT INTO `sys_permission` VALUES ('1', 'queryall', null, '查询全部', 'DEFAULT', '1');
-INSERT INTO `sys_permission` VALUES ('2', 'queryone', null, '查询单个', 'DEFAULT', '1');
-
--- ----------------------------
--- Table structure for sys_permission_groups
--- ----------------------------
-DROP TABLE IF EXISTS `sys_permission_groups`;
-CREATE TABLE `sys_permission_groups` (
-  `id` int(11) NOT NULL,
-  `value` varchar(50) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限分组';
-
--- ----------------------------
--- Records of sys_permission_groups
--- ----------------------------
-
--- ----------------------------
--- Table structure for sys_permission_resources
--- ----------------------------
-DROP TABLE IF EXISTS `sys_permission_resources`;
-CREATE TABLE `sys_permission_resources` (
-  `permission_id` int(20) NOT NULL COMMENT '权限id',
-  `resources_id` bigint(20) NOT NULL COMMENT '资源id',
-  `description` varchar(255) DEFAULT NULL COMMENT '描述',
-  PRIMARY KEY (`permission_id`,`resources_id`),
-  KEY `fk_sys_permission_resouces_resources` (`resources_id`),
-  CONSTRAINT `fk_sys_permission_resouces_permission` FOREIGN KEY (`permission_id`) REFERENCES `sys_permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_sys_permission_resouces_resources` FOREIGN KEY (`resources_id`) REFERENCES `sys_resources` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_permission_resources
--- ----------------------------
-
--- ----------------------------
--- Table structure for sys_resources
--- ----------------------------
-DROP TABLE IF EXISTS `sys_resources`;
-CREATE TABLE `sys_resources` (
+DROP TABLE IF EXISTS `sys_resource`;
+CREATE TABLE `sys_resource` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL COMMENT '资源名称',
+  `value` varchar(255) DEFAULT NULL COMMENT '资源名称',
+  `name` varchar(255) DEFAULT NULL COMMENT '中文描述',
+  `permission` varchar(255) DEFAULT NULL,
   `type` varchar(100) DEFAULT NULL COMMENT '资源类型',
+  `level` varchar(100) DEFAULT NULL COMMENT '级别',
+  `parent` varchar(100) DEFAULT NULL COMMENT '上级',
+  `classes` varchar(100) DEFAULT NULL COMMENT '菜单样式类',
   `priority` int(11) DEFAULT NULL COMMENT '显示顺序',
   `state` int(11) DEFAULT '1' COMMENT '状态，默认1正常',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_resources
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -166,31 +125,20 @@ CREATE TABLE `sys_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of sys_role
+-- Table structure for sys_role_resource
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', 'admin', null, null, '1');
-INSERT INTO `sys_role` VALUES ('2', 'user', null, null, '1');
-
--- ----------------------------
--- Table structure for sys_role_permission
--- ----------------------------
-DROP TABLE IF EXISTS `sys_role_permission`;
-CREATE TABLE `sys_role_permission` (
-  `role_id` int(11) NOT NULL COMMENT '角色ID',
-  `permission_id` int(11) NOT NULL COMMENT '权限Id',
+DROP TABLE IF EXISTS `sys_role_resource`;
+CREATE TABLE `sys_role_resource` (
+  `role_id` int(11) NOT NULL,
+  `resource_id` bigint(20) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`role_id`,`permission_id`),
-  KEY `fk_sys_role_permission_permission` (`permission_id`),
-  CONSTRAINT `fk_sys_role_permission_permission` FOREIGN KEY (`permission_id`) REFERENCES `sys_permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_sys_role_permission_role` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `available` tinyint(1) DEFAULT '0' COMMENT '是否可用',
+  PRIMARY KEY (`role_id`,`resource_id`),
+  KEY `sys_role_resource_role_id` (`role_id`) USING BTREE,
+  KEY `sys_role_resource_resource_id` (`resource_id`),
+  CONSTRAINT `sys_role_resource_resource_id` FOREIGN KEY (`resource_id`) REFERENCES `sys_resource` (`id`),
+  CONSTRAINT `sys_role_resource_role_id` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_role_permission
--- ----------------------------
-INSERT INTO `sys_role_permission` VALUES ('1', '1', null);
-INSERT INTO `sys_role_permission` VALUES ('1', '2', null);
-INSERT INTO `sys_role_permission` VALUES ('2', '2', null);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -202,56 +150,15 @@ CREATE TABLE `sys_user` (
   `password` varchar(255) NOT NULL COMMENT '密码',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `telephone` varchar(50) DEFAULT NULL COMMENT '电话号码',
+  `avatar` varchar(100) DEFAULT NULL COMMENT '头像图片',
   `salt` varchar(100) DEFAULT NULL COMMENT '盐值',
   `single_role` int(11) DEFAULT NULL,
+  `message` int(11) DEFAULT '0' COMMENT '消息数量',
+  ` notification` int(11) DEFAULT '0' COMMENT '通知数量',
+  `task` int(11) DEFAULT '0' COMMENT '任务数量',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `state` int(10) DEFAULT '1' COMMENT '状态，默认1正常,0删除，-1锁定',
   PRIMARY KEY (`id`),
   KEY `fk_sys_user_single_role` (`single_role`),
   CONSTRAINT `fk_sys_user_single_role` FOREIGN KEY (`single_role`) REFERENCES `sys_role` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_user
--- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'joe', 'e10adc3949ba59abbe56e057f20f883e', null, null, '', '1', '2019-03-31 23:06:31', '1');
-INSERT INTO `sys_user` VALUES ('2', 'jill', 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '2', '2019-04-09 15:44:38', '1');
-
--- ----------------------------
--- Table structure for sys_user_permission
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_permission`;
-CREATE TABLE `sys_user_permission` (
-  `user_id` bigint(20) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id`,`permission_id`),
-  KEY `fk_sys_user_permission_permission` (`permission_id`),
-  CONSTRAINT `fk_sys_user_permission_permission` FOREIGN KEY (`permission_id`) REFERENCES `sys_permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_sys_user_permission_user` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='user特殊权限，对应permission建议创建不是default类型的权限\r\n一般情况下，使用role对应permission';
-
--- ----------------------------
--- Records of sys_user_permission
--- ----------------------------
-
--- ----------------------------
--- Table structure for sys_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role` (
-  `user_id` bigint(20) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `state` int(11) DEFAULT '1',
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `fk_sys_user_role_role` (`role_id`),
-  CONSTRAINT `fk_sys_user_role_role` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_sys_user_role_user` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='一个用户对应多个角色时使用';
-
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1', '1', null, '2019-03-31 23:00:17', '1');

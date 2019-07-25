@@ -5,6 +5,7 @@ import com.tan.start.query.Query;
 import java.util.*;
 
 /**
+ * 建议使用
  * @see org.springframework.http.ResponseEntity
  * @see com.github.pagehelper.PageInfo
  * @see ResponseContent

@@ -58,7 +58,7 @@ $("#modifyUserInfoForm").submit(function(e){
     if(previous != "" &&  previous == present){
       return;
     }
-    $.post("/user/modify",$("#modifyUserInfoForm").serialize()).then(
+    $.post("user/modify",$("#modifyUserInfoForm").serialize()).then(
     function(response){
       console.log(response);
       if(response.code == 1){

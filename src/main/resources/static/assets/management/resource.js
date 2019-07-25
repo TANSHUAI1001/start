@@ -3,7 +3,7 @@ var ManagementResource = function(){
         var table = $('#example').DataTable({
                 serverSide:true,
                 ajax:{
-                  url:"/sys/resource",
+                  url:"sys/resource",
                   data:fix_data_format
                 },
                 autoWidth: false,

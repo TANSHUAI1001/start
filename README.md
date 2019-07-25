@@ -28,7 +28,8 @@ eclipse targetProject="start/src/main/java"
 [官网xmlconfig](http://www.mybatis.org/generator/configreference/xmlconfig.html)
 
 ## 使用freemaker
-
+可直接使用context.getContextPath(),不需配置request-context-attribute
+https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/support/RequestContext.html
 建立 static和templates文件夹
 需要配置：
 
@@ -37,6 +38,16 @@ spring.freemarker.template-loader-path=classpath:/templates
 spring.freemarker.suffix=.html
 ```
 不然总是报错Whitelabel Error Page
+
+HTML查看前端所有的属性
+<#list .data_model?keys as key>
+<li>${key}</li>
+</#list>
+
+# IDEA
+Show Option Menu
+按文件类型排序 
+Sort by Type
 
 ## eclipse 配置
 

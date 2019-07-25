@@ -4,7 +4,7 @@ var ManagementRole = function(){
           table = $('#example').DataTable({
             serverSide:true,
             ajax:{
-              url:"/sys/role",
+              url:"sys/role",
               data:function(d){
               return{
                 draw: d.draw,
@@ -35,7 +35,7 @@ var ManagementRole = function(){
                   }
                 }},
                 {title: "资源权限",render:function(data,type,row,meta){
-                  return '<a href="#'+row.name+'" onclick="ManagementRole.getResource('+row.id+')">查看</a>';
+                  return '<a href="javascript:void(0);" onclick="ManagementRole.getResource('+row.id+')">查看</a>';
                 }}
 
             ]
@@ -57,7 +57,7 @@ var ManagementRole = function(){
     ManagementRole.rolePermissionTable = $('#rolePermissionTable').DataTable({
     serverSide:true,
     ajax:{
-      url:"/sys/roleResource",
+      url:"sys/roleResource",
       data:function(d){
         d.roleId = id;
         return fix_data_format(d);
@@ -93,12 +93,12 @@ var ManagementRole = function(){
 
 
   var removePermission = function(resId,roleId){
-    $.post("/sys/updateRoleResource",{roleId:roleId,resourceId:resId,state:0},function(res){
+    $.post("sys/updateRoleResource",{roleId:roleId,resourceId:resId,state:0},function(res){
       console.log(res);
     }).done(ManagementRole.rolePermissionTable.draw('page'));
   }
   var addPermission = function(resId,roleId){
-    $.post("/sys/updateRoleResource",{roleId:roleId,resourceId:resId,state:1},function(res){
+    $.post("sys/updateRoleResource",{roleId:roleId,resourceId:resId,state:1},function(res){
       console.log(res);
     }).done(ManagementRole.rolePermissionTable.draw('page'));
   }

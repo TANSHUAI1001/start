@@ -33,12 +33,12 @@
                     </a>
                     <ul class="treeview-menu">
                         <#list menu.sub as item>
-                        <li class="<#if active == item.value >active</#if>" ><a href="${item.value}"><i class="fa ${item.classes}"></i>${item.name}</a></li>
+                        <li class="<#if active == item.value >active</#if>" ><a href="${item.value?substring(1)}"><i class="fa ${item.classes}"></i>${item.name}</a></li>
                         </#list>
                     </ul>
                 </li>
             <#else>
-                <li class="<#if active == menu.value>active</#if>" ><a href="${menu.value}"><i class="fa ${menu.classes}"></i> <span>${menu.name}</span></a></li>
+                <li class="<#if active == menu.value>active</#if>" ><a href="${menu.value?substring(1)}"><i class="fa ${menu.classes}"></i> <span>${menu.name}</span></a></li>
             </#if>
     </#list>
 <#--            <li class="<#if active == '/dashboard'>active</#if>" ><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>-->
