@@ -21,7 +21,7 @@ public class StartApplication {
     }
 
 }
-//
+
 //// war包部署
 //@SpringBootApplication
 ////@ComponentScan(basePackages = {"com.tan.start.**.**"})
