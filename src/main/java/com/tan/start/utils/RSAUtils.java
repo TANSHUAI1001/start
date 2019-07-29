@@ -26,7 +26,7 @@ public class RSAUtils {
 
     public static String readKeyFromFile(String filePath){
         try {
-            FileReader reader = new FileReader(ResourceUtils.getURL(filePath).getFile());
+            FileReader reader = new FileReader(ResourceUtils.getFile(filePath));
             BufferedReader bufferedReader = new BufferedReader(reader);
             String line;
             StringBuilder whole = new StringBuilder();
