@@ -1,7 +1,7 @@
 package com.tan.start.exception.handler;
 
-import com.tan.start.controller.HomeController;
-import com.tan.start.controller.MenuController;
+import com.tan.start.controller.page.HomeController;
+import com.tan.start.controller.page.MenuController;
 import com.tan.start.exception.CommonException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
