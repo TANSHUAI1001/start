@@ -21,13 +21,13 @@ public class ResponseContent<T> implements Serializable {
     private static final String FAIL_MSG = "操作失败!";
 
     protected int code;
-    protected int draw;
-    protected int start;
-    protected int length;
+    protected Integer draw;
+    protected Integer start;
+    protected Integer length;
 
-    protected long recordsFiltered;
-    protected long recordsTotal;
-    protected List<T> data;
+    protected Long recordsFiltered;
+    protected Long recordsTotal;
+    protected T data;
     protected String error;
     protected String msg;
 
@@ -39,12 +39,12 @@ public class ResponseContent<T> implements Serializable {
         this.msg = msg;
     }
 
-    public ResponseContent(List<T> list) {
+    public ResponseContent(T list) {
         this.data = list;
         if(list instanceof Page){
             this.recordsTotal = ((Page)list).getTotal();
-        } else {
-            this.recordsTotal = list.size();
+        } else if(list instanceof List) {
+            this.recordsTotal = (long) ((List)list).size();
         }
         this.recordsFiltered = this.recordsTotal;
     }
@@ -53,7 +53,7 @@ public class ResponseContent<T> implements Serializable {
         return new ResponseContent<T>().putCode(SUCCESS).putMsg(SUCCESS_MSG);
     }
 
-    public static <T> ResponseContent<T> ok(List<T> list){
+    public static <T> ResponseContent<T> ok(T list){
         return new ResponseContent<>(list).putCode(SUCCESS).putMsg(SUCCESS_MSG);
     }
 
@@ -103,51 +103,51 @@ public class ResponseContent<T> implements Serializable {
         this.code = code;
     }
 
-    public int getDraw() {
+    public Integer getDraw() {
         return draw;
     }
 
-    public void setDraw(int draw) {
+    public void setDraw(Integer draw) {
         this.draw = draw;
     }
 
-    public int getStart() {
+    public Integer getStart() {
         return start;
     }
 
-    public void setStart(int start) {
+    public void setStart(Integer start) {
         this.start = start;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
-    public long getRecordsFiltered() {
+    public Long getRecordsFiltered() {
         return recordsFiltered;
     }
 
-    public void setRecordsFiltered(long recordsFiltered) {
+    public void setRecordsFiltered(Long recordsFiltered) {
         this.recordsFiltered = recordsFiltered;
     }
 
-    public long getRecordsTotal() {
+    public Long getRecordsTotal() {
         return recordsTotal;
     }
 
-    public void setRecordsTotal(long recordsTotal) {
+    public void setRecordsTotal(Long recordsTotal) {
         this.recordsTotal = recordsTotal;
     }
 
-    public List<T> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(T data) {
         this.data = data;
     }
 

@@ -13,7 +13,7 @@
 	<version>0.0.1</version>
 	<name>start</name>
 	<!-- war包部署 -->
-<!--	<packaging>war</packaging>-->
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

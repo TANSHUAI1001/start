@@ -17,12 +17,18 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class RSAUtils {
 
     private static Logger logger = LoggerFactory.getLogger(RSAUtils.class);
     private static final String PUBLIC_KEY = readKeyFromFile("classpath:rsa_public_key.pem");
     private static final String PRIVATE_KEY = readKeyFromFile("classpath:rsa_private_key.pem");
+
+    public static boolean isBase64(String str) {
+        String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
+        return Pattern.matches(base64Pattern, str);
+    }
 
     public static String readKeyFromFile(String filePath){
         try {

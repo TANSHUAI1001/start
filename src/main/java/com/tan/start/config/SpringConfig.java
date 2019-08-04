@@ -8,9 +8,12 @@ import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoC
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+/**
+ * @see AppInitializer
+ */
+//@Configuration
 public class SpringConfig {
-    @Bean
+//    @Bean
     public static BeanFactoryPostProcessor beanFactoryPostProcessor() {
         return beanFactory -> {
             BeanDefinition bean = beanFactory.getBeanDefinition(
