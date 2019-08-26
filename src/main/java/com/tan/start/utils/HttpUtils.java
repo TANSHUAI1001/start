@@ -156,8 +156,10 @@ public class HttpUtils {
     }
     
     public static boolean isAjaxRequest(HttpServletRequest request) {
-        return (request.getHeader("X-Requested-With") != null
-                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
+        String header = request.getHeader("X-Requested-With");
+        boolean xRequestWith = "XMLHttpRequest".equals(header);
+        boolean remote = !request.getHeader("Host").equals(request.getHeader("Origin"));
+        return xRequestWith || remote;
     }
 
 }

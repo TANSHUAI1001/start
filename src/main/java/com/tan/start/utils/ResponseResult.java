@@ -109,14 +109,14 @@ public class ResponseResult extends TreeMap<String, Object> {
     }
 
     public ResponseResult putBaseAttr(Query query) {
-        super.put(DRAW, query.getDraw());
+//        super.put(DRAW, query.getDraw());
         super.put(START, query.getStart());
         super.put(LENGTH, query.getLength());
         return this;
     }
 
     public ResponseResult putBaseAttr(Query query,long total) {
-        super.put(DRAW, query.getDraw());
+//        super.put(DRAW, query.getDraw());
         super.put(START, query.getStart());
         super.put(LENGTH, query.getLength());
         super.put(RECORDS_TOTAL, total);

@@ -55,9 +55,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
-		
+
 		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
 		<!-- dao接口导入报错 import org.apache.ibatis.annotations.Param; -->
 		<dependency>
@@ -116,23 +114,6 @@
             <version>3.1.0</version>
         </dependency>
 
-		<!-- shiro-freemarker-tags -->
-		<dependency>
-			<groupId>net.mingsoft</groupId>
-			<artifactId>shiro-freemarker-tags</artifactId>
-			<version>1.0.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.shiro</groupId>
-					<artifactId>shiro-all</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.freemarker</groupId>
-					<artifactId>freemarker</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -157,7 +138,15 @@
 			<optional>true</optional>
 		</dependency>
 
-<!--		&lt;!&ndash;部署成war包时开启↓↓↓↓&ndash;&gt;-->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+		</dependency>
+
+
+		<!--		&lt;!&ndash;部署成war包时开启↓↓↓↓&ndash;&gt;-->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-tomcat</artifactId>-->
@@ -174,7 +163,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>hello</finalName>
+		<finalName>start-back-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

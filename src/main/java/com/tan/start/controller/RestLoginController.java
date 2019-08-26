@@ -1,6 +1,8 @@
 package com.tan.start.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.tan.start.aspect.AspectConfig;
+import com.tan.start.config.shiro.ShiroRealm;
 import com.tan.start.dto.RoleResourceDTO;
 import com.tan.start.dto.SysUserDTO;
 import com.tan.start.entity.SysUser;
@@ -8,6 +10,7 @@ import com.tan.start.service.SysResourceService;
 import com.tan.start.utils.GenerateTreeFromList;
 import com.tan.start.utils.Menu;
 import com.tan.start.utils.ResponseContent;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -26,8 +29,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/common")
+@Slf4j
 public class RestLoginController {
-    private Logger logger = LoggerFactory.getLogger(AspectConfig.class);
+    @Resource
+    private ShiroRealm realm;
 
     @Resource
     private SysResourceService sysResourcesService;
@@ -45,21 +50,54 @@ public class RestLoginController {
             subject.logout();
             subject.login(token);
         }catch (Exception e){
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             return ResponseContent.fail(e.getMessage());
         }
 
+        return ResponseContent.ok();
+//        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
+//        //支持多级菜单生成
+//        List<Menu> menus = template.opsForValue().get("menu:"+user.getSingleRole());
+//        if(menus == null) {
+//            List<RoleResourceDTO> resources = sysResourcesService.getMenuByRole(user.getSingleRole());
+//            menus = GenerateTreeFromList.generateTree(resources);
+//            template.opsForValue().set("menu:"+user.getSingleRole(), menus);
+//        }
+//        HashMap<String,Object> map = new HashMap<>();
+//        map.put("user",new SysUserDTO(user));
+//        map.put("menus",menus);
+//        return ResponseContent.ok(map);
+    }
+
+    @RequestMapping(value="/user",method= RequestMethod.GET)
+    public ResponseContent getUserInfo(){
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
-        //支持多级菜单生成
+        return ResponseContent.ok(new SysUserDTO(user));
+    }
+
+    @RequestMapping(value="/menu",method= RequestMethod.GET)
+    public ResponseContent getMenu(){
+        SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         List<Menu> menus = template.opsForValue().get("menu:"+user.getSingleRole());
         if(menus == null) {
             List<RoleResourceDTO> resources = sysResourcesService.getMenuByRole(user.getSingleRole());
             menus = GenerateTreeFromList.generateTree(resources);
             template.opsForValue().set("menu:"+user.getSingleRole(), menus);
         }
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("user",new SysUserDTO(user));
-        map.put("menus",menus);
-        return ResponseContent.ok(map);
+        return ResponseContent.ok(menus);
+    }
+
+    @RequestMapping(value = "/logout",method = {RequestMethod.GET,RequestMethod.POST})
+    public ResponseContent logout(HttpServletRequest request){
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            realm.clearCache();
+        }catch (IllegalStateException ise){
+            String msg = ise.getMessage();
+            log.debug(msg);
+            ResponseContent.fail(msg);
+        }
+        return ResponseContent.ok();
     }
 }

@@ -1,11 +1,13 @@
 package com.tan.start.vo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class BaseVO {
 
     @Deprecated
@@ -13,7 +15,7 @@ public class BaseVO {
         try {
             BeanUtils.copyProperties(dest,orig);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            log.error("illegal access or invocation target: ",e);
         }
         return dest;
     }
@@ -26,7 +28,7 @@ public class BaseVO {
             try {
                 tmp = (T) destClz.newInstance();
             } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("instantiation or illegal access: ",e);
             }
             convert(tmp,item);
             dest.add(tmp);

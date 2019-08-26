@@ -65,10 +65,10 @@
 <!--      <table schema="shop" tableName="sys_organization" alias="sys_organization"/>-->
 <!--      <table schema="shop" tableName="sys_permission" alias="sys_permission" />-->
       <table schema="shop" tableName="sys_resource" alias="sys_resource"/>
-      <table schema="shop" tableName="sys_role" alias="sys_role" />
+<!--      <table schema="shop" tableName="sys_role" alias="sys_role" />-->
 <!--      <table schema="shop" tableName="sys_user" alias="sys_user"/>-->
 <!--      <table schema="shop" tableName="fund_data" alias="fund_data"/>-->
-      <table schema="shop" tableName="sys_role_resource" alias="sys_role_resource"/>
+<!--      <table schema="shop" tableName="sys_role_resource" alias="sys_role_resource"/>-->
 
 
   </context>

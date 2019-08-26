@@ -3,6 +3,7 @@ package com.tan.start.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tan.start.entity.SysUser;
 import com.tan.start.utils.RSAUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationTargetException;
 
 @JsonIgnoreProperties({"password","salt","singleRole"})
+@Slf4j
 public class SysUserDTO extends SysUser {
-    private Logger logger = LoggerFactory.getLogger(SysUserDTO.class);
     private static final long serialVersionUID = -4896498428027988338L;
     private String roleName;
 
@@ -23,7 +24,7 @@ public class SysUserDTO extends SysUser {
         try {
             BeanUtils.copyProperties(this,user);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage(),e);
         }
     }
 

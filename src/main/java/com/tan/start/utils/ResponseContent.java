@@ -74,7 +74,7 @@ public class ResponseContent<T> implements Serializable {
     }
 
     public ResponseContent<T> putQuery(Query query){
-        this.setDraw(query.getDraw());
+//        this.setDraw(query.getDraw());
         this.setStart(query.getStart());
         this.setLength(query.getLength());
         return this;

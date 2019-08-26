@@ -18,9 +18,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
@@ -115,8 +117,8 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();        
         
-//        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters
-//		filters.put("user", new CustomUserFilter());
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters
+		filters.put("user", new CustomUserFilter());
 		
         // 设置 securityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);

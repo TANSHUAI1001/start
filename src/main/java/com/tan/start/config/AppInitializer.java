@@ -16,7 +16,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
         // Optionally also set maxFileSize, maxRequestSize, fileSizeThreshold
         // fileSizeThreshold: 设置文件缓存的临界点,超过则先保存到临时目录(byte)
-        registration.setMultipartConfig(new MultipartConfigElement("/tmp",200*1024*1024,100,1024*1024));
+        registration.setMultipartConfig(new MultipartConfigElement("E:/tmp",200*1024*1024,100,1024*1024));
         registration.setLoadOnStartup(1);
 
     }
