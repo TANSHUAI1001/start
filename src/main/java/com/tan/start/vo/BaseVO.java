@@ -21,12 +21,12 @@ public class BaseVO {
     }
 
     @Deprecated
-    public static <T> List<T> convertList(List orig,Class destClz){
+    public static <T> List<T> convertList(List orig,Class<T> destClz){
         List<T> dest = new ArrayList<>();
         for (Object item:orig) {
             T tmp = null;
             try {
-                tmp = (T) destClz.newInstance();
+                tmp = destClz.newInstance();
             } catch (InstantiationException | IllegalAccessException e) {
                 log.error("instantiation or illegal access: ",e);
             }
