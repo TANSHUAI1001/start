@@ -37,7 +37,7 @@ public class ActivityController {
     public List<Activity> data(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("name","shuai");
-        logger.debug("sessionNew ?  "+session.isNew());
+        logger.debug("sessionNew ?  {0}",session.isNew());
         return activityService.queryActivities();
     }
 
@@ -48,7 +48,7 @@ public class ActivityController {
         PageHelper.startPage(1,3);
         List<Activity> list = activityService.queryActivities();
         PageInfo<Activity> info = new PageInfo<Activity>(list);
-        logger.info("size: "+info.getSize());
+        logger.info("size: {0}",info.getSize());
         return ResponseEntity.ok(info);
 
     }
